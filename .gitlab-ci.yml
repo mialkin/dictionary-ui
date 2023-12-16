@@ -14,4 +14,4 @@ publish:
     - docker build -t ${DOCKER_IMAGE_NAME}:1.0.0 .
     - docker login --username ${DOCKER_REGISTRY_USERNAME} --password ${DOCKER_REGISTRY_PASSWORD}
     - docker push ${DOCKER_IMAGE_NAME}:1.0.0
-    - docker logout ${CI_REGISTRY}
+    - docker logout
