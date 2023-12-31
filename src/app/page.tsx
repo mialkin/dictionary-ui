@@ -5,7 +5,6 @@ export default function Home() {
         <div>
             <h1>Главная страница</h1>
             <div className="rectangle">Прямоугольник</div>
-            
         </div>
     )
 }
