@@ -1,7 +1,11 @@
+import './css/style.css'
+
 export default function Home() {
     return (
         <div>
-            <h1>Dictionary main page</h1>
+            <h1>Главная страница</h1>
+            <div className="rectangle">Прямоугольник</div>
+            
         </div>
     )
 }
