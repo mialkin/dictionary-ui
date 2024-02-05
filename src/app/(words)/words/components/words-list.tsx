@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Word } from "@/app/(words)/words/types/types";
-
+import  styles from './words-list.module.css'
 export default function WordsList({ languageId, term }: { languageId: number, term: string }) {
     // TODO responses from server can come at different sequence if user types quickly.
     // Preserve sequence
@@ -31,11 +31,11 @@ export default function WordsList({ languageId, term }: { languageId: number, te
 
     // TODO Create site map and forbid search engines crawl user's dictionaries
     function getTranscription(word: Word) {
-        return <>&nbsp;<span className={"word__transcription"}>/{word.transcription}/</span>&nbsp;</>;
+        return <>&nbsp;<span className={styles.transcription}>/{word.transcription}/</span>&nbsp;</>;
     }
 
     const list = data.result.map((word: Word) =>
-        <div key={word.id} className={"word"}>
+        <div key={word.id} className={styles.word}>
             <b>{word.name}</b>
             {word.transcription == null ? ' ' : getTranscription(word)}
             — {word.translation}

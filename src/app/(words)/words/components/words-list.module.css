@@ -1,0 +1,10 @@
+.word {
+    margin: 0 0 20px 0;
+    line-height: 1.5em;
+}
+
+
+.transcription {
+    font-style: italic;
+    color: gray;
+}
