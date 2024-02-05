@@ -2,6 +2,7 @@
 
 import styles from './page.module.css'
 import React, { useEffect } from "react";
+import WordsList from "@/app/(words)/words/components/words-list";
 
 export default function Words() {
 
@@ -15,15 +16,16 @@ export default function Words() {
         };
     }, []);
 
+    let languageId = 1;
+    let term = 'a';
+
     return (
         <main>
             <div>
                 <div className={styles.searchbar}>
                     <input placeholder="Найти..." />
                 </div>
-                <div>
-                    Cписок слов
-                </div>
+                <WordsList languageId={languageId} term={term} />
             </div>
         </main>
     );
