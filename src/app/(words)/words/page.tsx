@@ -23,7 +23,8 @@ export default function Words() {
         <main>
             <div>
                 <div className={styles.searchbar}>
-                    <input placeholder="Найти..." />
+                    <input placeholder="Найти..." autoFocus />
+                {/* TODO   Change color of autofocused input with styles*/}
                 </div>
                 <WordsList languageId={languageId} term={term} />
             </div>
