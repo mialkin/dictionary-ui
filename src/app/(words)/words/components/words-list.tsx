@@ -11,9 +11,11 @@ export default function WordsList({ languageId, term }: { languageId: number, te
     const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        console.log('Fetching inside useEffect')
+        let url = new URL('api/words/search', process.env.NEXT_PUBLIC_GATEWAY_API_URL);
+        url.searchParams.set('languageId', languageId.toString());
+        url.searchParams.set('term', term);
 
-        fetch('http://localhost:2100/api/words/search?languageId=1&term=a')
+        fetch(url.toString())
             .then((res) => res.json())
             .then((data) => {
                 setData(data)
@@ -22,11 +24,11 @@ export default function WordsList({ languageId, term }: { languageId: number, te
     }, [])
 
     // TODO Show spinner? 
-    if (isLoading) return <p>Загрузка...</p> 
+    if (isLoading) return <p>Загрузка...</p>
 
     // TODO Do I need this?
     if (!data) return <p>Нет данных</p>
-    
+
     // TODO Create site map and forbid search engines crawl user's dictionaries
     function getTranscription(word: Word) {
         return <>&nbsp;<span className={"word__transcription"}>/{word.transcription}/</span>&nbsp;</>;
