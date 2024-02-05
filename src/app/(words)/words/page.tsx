@@ -1,13 +1,19 @@
 'use client'
 
-import styles from './page.module.css'
 import React, { useEffect } from "react";
 import WordsList from "@/app/(words)/words/components/words-list";
+import WordsSearchbar from "@/app/(words)/words/components/words-searchbar";
 
 export default function Words() {
 
     useEffect(() => {
-        const keyDownHandler = (event: { code: any; }) => console.log(`You pressed ${event.code}.`);
+        const keyDownHandler = (event: { code: any; }) => {
+            if (event.code == 'Escape') {
+                console.log(`You pressed the Escape.`);
+            } else {
+                console.log(`You pressed ${event.code}.`);
+            }
+        }
         document.addEventListener("keydown", keyDownHandler);
 
         return () => {
@@ -20,14 +26,9 @@ export default function Words() {
     let term = 'a';
 
     return (
-        <main>
-            <div>
-                <div className={styles.searchbar}>
-                    <input placeholder="Найти..." autoFocus />
-                {/* TODO   Change color of autofocused input with styles*/}
-                </div>
-                <WordsList languageId={languageId} term={term} />
-            </div>
-        </main>
+        <div>
+            <WordsSearchbar />
+            <WordsList languageId={languageId} term={term} />
+        </div>
     );
 }
