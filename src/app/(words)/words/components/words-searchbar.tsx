@@ -22,15 +22,15 @@ export default function WordsSearchbar() {
         replace(`${pathname}?${params.toString()}`);
     }, 300);
 
-
     return <>
         <div className={styles.searchbar}>
             <input
                 placeholder="Найти..."
-                autoFocus
                 onChange={(e) => {
                     handleSearch(e.target.value);
-                }} />
+                }}
+                defaultValue={searchParams.get('term')?.toString()}
+            />
             {/* TODO   Change color of autofocused input with styles*/}
         </div>
     </>

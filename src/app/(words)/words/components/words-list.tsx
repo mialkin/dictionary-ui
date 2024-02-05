@@ -21,7 +21,7 @@ export default function WordsList({ languageId, term }: { languageId: number, te
                 setData(data)
                 setLoading(false)
             })
-    }, [])
+    }, [languageId, term])
 
     // TODO Show spinner? 
     if (isLoading) return <p>Загрузка...</p>
