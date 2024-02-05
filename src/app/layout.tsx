@@ -16,7 +16,6 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         // TODO Why body has to have className?
         <html lang="en">
         <body className={inter.className}>
-        <div>Навигация</div>
         {children}
         </body>
         </html>
