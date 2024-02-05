@@ -1,7 +1,6 @@
 'use client'
 
 import styles from './page.module.css'
-import Link from "next/link";
 import React, { useEffect } from "react";
 
 export default function Words() {
@@ -18,10 +17,12 @@ export default function Words() {
 
     return (
         <main>
-            <div className={styles.word}>
-                Cписок слов
+            <div>
+                <div className={styles.searchbar}>
+                    <input placeholder="Найти..." />
+                </div>
                 <div>
-                    <Link href="/words/edit"> Редактировать слово </Link>
+                    Cписок слов
                 </div>
             </div>
         </main>
