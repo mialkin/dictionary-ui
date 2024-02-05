@@ -9,19 +9,6 @@ export default function Words({ searchParams, }: { searchParams?: { term?: strin
     const term = searchParams?.term || '';
     let languageId = searchParams?.language || 1;
 
-    useEffect(() => {
-        const keyDownHandler = (event: { code: any; }) => {
-            if (event.code == 'Escape') {
-                console.log(`You pressed the Escape.`);
-            }
-        }
-        document.addEventListener("keydown", keyDownHandler);
-
-        return () => {
-            document.removeEventListener("keydown", keyDownHandler);
-        };
-    }, []);
-
     return (
         <div>
             <WordsSearchbar />
