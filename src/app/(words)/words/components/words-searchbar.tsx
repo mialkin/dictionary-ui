@@ -24,7 +24,7 @@ export default function WordsSearchbar() {
         }
 
         replace(`${pathname}?${params.toString()}`);
-    }, 300);
+    }, 150);
 
     useEffect(() => {
         // @ts-ignore
