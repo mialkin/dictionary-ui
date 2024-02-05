@@ -18,17 +18,11 @@ export default function Words() {
 
     return (
         <main>
-            <div>
-                <Link href="/words/create"> Добавить слово </Link>
-            </div>
             <div className={styles.word}>
                 Cписок слов
                 <div>
                     <Link href="/words/edit"> Редактировать слово </Link>
                 </div>
-            </div>
-            <div>
-                <Link href="/">На главную</Link>
             </div>
         </main>
     );
