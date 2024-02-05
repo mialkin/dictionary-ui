@@ -40,7 +40,6 @@ export default function WordsSearchbar() {
                 // @ts-ignore
                 // inputRef.current.value = '';
                 // @ts-ignore
-                inputRef.current.blur();
             }
         }
         document.addEventListener("keydown", keyDownHandler);
