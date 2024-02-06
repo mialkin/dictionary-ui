@@ -4,6 +4,7 @@
 }
 
 .name {
+    all: unset;
     cursor: pointer;
     font-weight: bold;
 }

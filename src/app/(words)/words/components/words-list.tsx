@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Word } from "@/app/(words)/words/types/types";
 import styles from './words-list.module.css'
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function WordsList({ languageId, term }: { languageId: number, term: string }) {
     // TODO responses from server can come at different sequence if user types quickly.
@@ -39,9 +40,9 @@ export default function WordsList({ languageId, term }: { languageId: number, te
 
     const list = data.result.map((word: Word) =>
         <div key={word.id} className={styles.word}>
-            <span
-                className={styles.name}
-                onClick={() => router.push('/words/' + word.id + '/edit')}>{word.name}</span>
+            <Link href={'/words/' + word.id + '/edit'} className={styles.name}>
+                {word.name}
+            </Link>
             {word.transcription == null ? ' ' : getTranscription(word)} — {word.translation}
         </div>
     );
