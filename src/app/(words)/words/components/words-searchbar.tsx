@@ -30,9 +30,20 @@ export default function WordsSearchbar() {
         // @ts-ignore
         inputRef.current.focus();
 
-        const keyDownHandler = (event: { code: any; }) => {
-            // @ts-ignore
-            inputRef.current.focus();
+        const keyDownHandler = (event: any) => {
+
+            if (!event.metaKey
+                && !event.ctrlKey
+                && !event.shiftKey
+                && event.key != 'Tab'
+                && event.key != 'LeftShift'
+                && event.key != 'RightShift'
+                && event.key != 'Enter'
+            ) {
+                // @ts-ignore
+                inputRef.current.focus()
+            }
+            console.log(event.code)
 
             if (event.code == 'Escape') {
                 handleSearch('')
