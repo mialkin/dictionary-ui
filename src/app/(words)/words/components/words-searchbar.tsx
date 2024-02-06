@@ -55,7 +55,7 @@ export default function WordsSearchbar() {
         <div className={styles.searchbar}>
             <input
                 ref={inputRef}
-                placeholder="Найти..."
+                placeholder="Поиск..."
                 value={enteredText}
                 onChange={(e) => {
                     handleSearch(e.target.value);

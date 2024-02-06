@@ -3,6 +3,10 @@
     line-height: 1.5em;
 }
 
+.name {
+    cursor: pointer;
+    font-weight: bold;
+}
 
 .transcription {
     font-style: italic;
