@@ -6,17 +6,18 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function WordsSearchbar() {
-    const [enteredText, setEnteredText] = useState('');
-
-    const inputRef = useRef(null);
-
     const searchParams = useSearchParams();
+    const [enteredText, setEnteredText] = useState(searchParams.get('term')?.toString());
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const pathname = usePathname();
     const { replace } = useRouter();
 
     useEffect(() => {
-        // @ts-ignore
-        inputRef.current.focus();
+        if (inputRef.current && !enteredText) {
+            inputRef.current.focus();
+        }
 
         document.addEventListener("keydown", keyDownHandler);
 
@@ -25,7 +26,7 @@ export default function WordsSearchbar() {
         };
     }, []);
 
-    const handleSearch = useDebouncedCallback((term: string) => {
+    const updateSearchParams = useDebouncedCallback((term: string) => {
         const params = new URLSearchParams(searchParams);
 
         if (term) {
@@ -47,21 +48,16 @@ export default function WordsSearchbar() {
             && event.key != 'RightShift'
             && event.key != 'Enter'
         ) {
-            // @ts-ignore
-            inputRef.current.focus()
+            if (inputRef.current) {
+                inputRef.current.focus()
+            }
         }
-        console.log(event.code)
-        console.log(enteredText)
 
         if (event.code == 'Escape') {
-            handleSearch('')
+            updateSearchParams('')
             setEnteredText('')
-            // @ts-ignore
-            // inputRef.current.value = '';
-            // @ts-ignore
         }
     }
-
 
     return <>
         <div className={styles.searchbar}>
@@ -70,13 +66,12 @@ export default function WordsSearchbar() {
                 placeholder="Поиск..."
                 value={enteredText}
                 onChange={(event) => {
-                    handleSearch(event.target.value);
+                    updateSearchParams(event.target.value);
                 }}
                 onInput={event => {
                     let target = event.target as HTMLInputElement;
                     setEnteredText(target.value);
                 }}
-                defaultValue={searchParams.get('term')?.toString()}
             />
             {/* TODO   Change color of autofocused input with styles*/}
         </div>
