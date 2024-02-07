@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function WordsSearchbar() {
     const searchParams = useSearchParams();
-    const [enteredText, setEnteredText] = useState(searchParams.get('term')?.toString());
+    const [enteredText, setEnteredText] = useState(searchParams.get('term')?.toString() || '');
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -15,8 +15,12 @@ export default function WordsSearchbar() {
     const { replace } = useRouter();
 
     useEffect(() => {
-        if (inputRef.current && !enteredText) {
+        if (inputRef.current) {
             inputRef.current.focus();
+
+            if (enteredText.length > 0) {
+                inputRef.current.setSelectionRange(enteredText.length, enteredText.length)
+            }
         }
 
         document.addEventListener("keydown", keyDownHandler);
@@ -39,19 +43,6 @@ export default function WordsSearchbar() {
     }, 150);
 
     const keyDownHandler = (event: any) => {
-
-        if (!event.metaKey
-            && !event.ctrlKey
-            && !event.shiftKey
-            && event.key != 'Tab'
-            && event.key != 'LeftShift'
-            && event.key != 'RightShift'
-            && event.key != 'Enter'
-        ) {
-            if (inputRef.current) {
-                inputRef.current.focus()
-            }
-        }
 
         if (event.code == 'Escape') {
             updateSearchParams('')
