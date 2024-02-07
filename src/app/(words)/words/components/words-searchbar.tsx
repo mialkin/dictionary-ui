@@ -14,6 +14,17 @@ export default function WordsSearchbar() {
     const pathname = usePathname();
     const { replace } = useRouter();
 
+    useEffect(() => {
+        // @ts-ignore
+        inputRef.current.focus();
+
+        document.addEventListener("keydown", keyDownHandler);
+
+        return () => {
+            document.removeEventListener("keydown", keyDownHandler);
+        };
+    }, []);
+
     const handleSearch = useDebouncedCallback((term: string) => {
         const params = new URLSearchParams(searchParams);
 
@@ -26,41 +37,31 @@ export default function WordsSearchbar() {
         replace(`${pathname}?${params.toString()}`);
     }, 150);
 
-    useEffect(() => {
-        // @ts-ignore
-        inputRef.current.focus();
+    const keyDownHandler = (event: any) => {
 
-        const keyDownHandler = (event: any) => {
-
-            if (!event.metaKey
-                && !event.ctrlKey
-                && !event.shiftKey
-                && event.key != 'Tab'
-                && event.key != 'LeftShift'
-                && event.key != 'RightShift'
-                && event.key != 'Enter'
-            ) {
-                // @ts-ignore
-                inputRef.current.focus()
-            }
-            console.log(event.code)
-
-            if (event.code == 'Escape') {
-                handleSearch('')
-                setEnteredText('')
-                // @ts-ignore
-                // inputRef.current.value = '';
-                // @ts-ignore
-            }
+        if (!event.metaKey
+            && !event.ctrlKey
+            && !event.shiftKey
+            && event.key != 'Tab'
+            && event.key != 'LeftShift'
+            && event.key != 'RightShift'
+            && event.key != 'Enter'
+        ) {
+            // @ts-ignore
+            inputRef.current.focus()
         }
-        document.addEventListener("keydown", keyDownHandler);
+        console.log(event.code)
+        console.log(enteredText)
 
-        return () => {
-            document.removeEventListener("keydown", keyDownHandler);
-        };
-    }, []);
+        if (event.code == 'Escape') {
+            handleSearch('')
+            setEnteredText('')
+            // @ts-ignore
+            // inputRef.current.value = '';
+            // @ts-ignore
+        }
+    }
 
-    const onInput = (e: any) => setEnteredText(e.target.value);
 
     return <>
         <div className={styles.searchbar}>
@@ -68,10 +69,13 @@ export default function WordsSearchbar() {
                 ref={inputRef}
                 placeholder="Поиск..."
                 value={enteredText}
-                onChange={(e) => {
-                    handleSearch(e.target.value);
+                onChange={(event) => {
+                    handleSearch(event.target.value);
                 }}
-                onInput={onInput}
+                onInput={event => {
+                    let target = event.target as HTMLInputElement;
+                    setEnteredText(target.value);
+                }}
                 defaultValue={searchParams.get('term')?.toString()}
             />
             {/* TODO   Change color of autofocused input with styles*/}
