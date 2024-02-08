@@ -3,13 +3,11 @@
 import { useEffect, useState } from "react";
 import { Word } from "@/app/(words)/words/types/types";
 import styles from './words-list.module.css'
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function WordsList({ languageId, term }: { languageId: number, term: string }) {
     // TODO responses from server can come at different sequence if user types quickly.
     // Preserve sequence
-    const router = useRouter()
 
     const [data, setData] = useState<any>(null)
     const [isLoading, setLoading] = useState(true)

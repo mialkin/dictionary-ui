@@ -3,7 +3,7 @@
 import styles from "./words-searchbar.module.css"
 import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { KeyboardEvent, useEffect, useRef, useState } from "react";
 
 export default function WordsSearchbar() {
     const searchParams = useSearchParams();
@@ -22,12 +22,6 @@ export default function WordsSearchbar() {
                 inputRef.current.setSelectionRange(enteredText.length, enteredText.length)
             }
         }
-
-        document.addEventListener("keydown", keyDownHandler);
-
-        return () => {
-            document.removeEventListener("keydown", keyDownHandler);
-        };
     }, []);
 
     const updateSearchParams = useDebouncedCallback((term: string) => {
@@ -42,11 +36,14 @@ export default function WordsSearchbar() {
         replace(`${pathname}?${params.toString()}`);
     }, 150);
 
-    const keyDownHandler = (event: any) => {
-
+    function handleSearchbarKeyDown(event: KeyboardEvent<HTMLInputElement>) {
         if (event.code == 'Escape') {
             updateSearchParams('')
             setEnteredText('')
+        }
+
+        if (event.code == 'Enter') {
+            console.log('Create word: "' + enteredText + '"')
         }
     }
 
@@ -63,6 +60,7 @@ export default function WordsSearchbar() {
                     let target = event.target as HTMLInputElement;
                     setEnteredText(target.value);
                 }}
+                onKeyDown={event => handleSearchbarKeyDown(event)}
             />
             {/* TODO   Change color of autofocused input with styles*/}
         </div>
