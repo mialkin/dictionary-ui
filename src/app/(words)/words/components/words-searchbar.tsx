@@ -7,7 +7,7 @@ import { KeyboardEvent, useEffect, useRef, useState } from "react";
 
 export default function WordsSearchbar() {
     const searchParams = useSearchParams();
-    const [enteredText, setEnteredText] = useState(searchParams.get('term')?.toString() || '');
+    const [enteredText, setEnteredText] = useState(searchParams.get('q')?.toString() || '');
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,13 +24,13 @@ export default function WordsSearchbar() {
         }
     }, []);
 
-    const updateSearchParams = useDebouncedCallback((term: string) => {
+    const updateSearchParams = useDebouncedCallback((query: string) => {
         const params = new URLSearchParams(searchParams);
 
-        if (term) {
-            params.set('term', term);
+        if (query) {
+            params.set('q', query);
         } else {
-            params.delete('term');
+            params.delete('q');
         }
 
         replace(`${pathname}?${params.toString()}`);

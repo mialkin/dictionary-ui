@@ -5,7 +5,7 @@ import { Word } from "@/app/(words)/words/types/types";
 import styles from './words-list.module.css'
 import Link from "next/link";
 
-export default function WordsList({ languageId, term }: { languageId: number, term: string }) {
+export default function WordsList({ languageId, query }: { languageId: number, query: string }) {
     // TODO responses from server can come at different sequence if user types quickly.
     // Preserve sequence
 
@@ -15,7 +15,7 @@ export default function WordsList({ languageId, term }: { languageId: number, te
     useEffect(() => {
         let url = new URL('api/words/search', process.env.NEXT_PUBLIC_GATEWAY_API_URL);
         url.searchParams.set('languageId', languageId.toString());
-        url.searchParams.set('term', term);
+        url.searchParams.set('query', query);
 
         fetch(url.toString())
             .then((res) => res.json())
@@ -23,7 +23,7 @@ export default function WordsList({ languageId, term }: { languageId: number, te
                 setData(data)
                 setLoading(false)
             })
-    }, [languageId, term])
+    }, [languageId, query])
 
     // TODO Show spinner? 
     if (isLoading) return <p>Загрузка...</p>
