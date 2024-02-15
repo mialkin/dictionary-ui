@@ -23,11 +23,15 @@ export function middleware(request: NextRequest) {
 }
 
 function pageForGuests(pathname: string) {
-    return pathname == '/' || pathname == '/login'
+    let guestPaths: string[] = ['/', '/login']
+
+    return guestPaths.indexOf(pathname) > -1
 }
 
 function pageForUsers(pathname: string) {
-    return pathname.startsWith('/words')
+    let userPaths: string[] = ['/words', '/settings']
+
+    return userPaths.some(x => pathname.startsWith(x))
 }
 
 export const config = {
