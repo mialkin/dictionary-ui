@@ -3,15 +3,6 @@ import type { NextRequest } from 'next/server'
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-    let userIsAuthenticated = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value
-
-    if (userIsAuthenticated) {
-        console.log('User is authenticated')
-    }
-
-    if (request.nextUrl.pathname == '/') {
-        console.log('root page')
-    }
 
     if (request.nextUrl.pathname == '/logout') {
         let response = NextResponse.redirect(new URL('/', request.url))
@@ -19,6 +10,24 @@ export function middleware(request: NextRequest) {
 
         return response;
     }
+
+    let user = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value
+
+    if (user && pageForGuests(request.nextUrl.pathname)) {
+        return NextResponse.redirect(new URL('/words', request.url))
+    }
+
+    if (!user && pageForUsers(request.nextUrl.pathname)) {
+        return NextResponse.redirect(new URL('/login', request.url))
+    }
+}
+
+function pageForGuests(pathname: string) {
+    return pathname == '/' || pathname == '/login'
+}
+
+function pageForUsers(pathname: string) {
+    return pathname.startsWith('/words')
 }
 
 export const config = {
