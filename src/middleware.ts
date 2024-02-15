@@ -3,14 +3,16 @@ import type { NextRequest } from 'next/server'
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
+    let userIsAuthenticated = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value
 
-    let session = request.cookies.get('Dictionary.Session')?.value
-    if (session) {
-        console.log('Session cookie is present: ' + session)
-    } else {
-        console.log('No session cookie')
+    if (userIsAuthenticated) {
+        console.log('User is authenticated')
     }
-    
+
+    if (request.url == '/') {
+        console.log('root page')
+    }
+
     // return NextResponse.redirect(new URL('/home', request.url))
 }
 
