@@ -9,11 +9,16 @@ export function middleware(request: NextRequest) {
         console.log('User is authenticated')
     }
 
-    if (request.url == '/') {
+    if (request.nextUrl.pathname == '/') {
         console.log('root page')
     }
 
-    // return NextResponse.redirect(new URL('/home', request.url))
+    if (request.nextUrl.pathname == '/logout') {
+        let response = NextResponse.redirect(new URL('/', request.url))
+        response.cookies.delete(process.env.SESSION_COOKIE_NAME!)
+
+        return response;
+    }
 }
 
 export const config = {
