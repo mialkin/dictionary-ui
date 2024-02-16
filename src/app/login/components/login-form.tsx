@@ -1,26 +1,40 @@
 'use client'
 
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginForm() {
     const router = useRouter()
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <div>
             <div>
                 <input placeholder='Имя пользователя'
                        type='text'
-                       name='username' />
+                       name='username'
+                       onInput={event => {
+                           let target = event.target as HTMLInputElement;
+                           setUsername(target.value);
+                       }}
+                />
             </div>
             <div>
                 <input placeholder='Пароль'
                        type='text'
-                       name='password' />
+                       name='password'
+                       onInput={event => {
+                           let target = event.target as HTMLInputElement;
+                           setPassword(target.value);
+                       }}
+                />
             </div>
             <div>
                 <button type='button'
                         onClick={async () => {
-                            let success = await loginUser()
+                            let success = await loginUser(username, password)
                             if (success) {
                                 router.push('/words')
                             }
@@ -32,11 +46,11 @@ export default function LoginForm() {
     );
 }
 
-async function loginUser() {
+async function loginUser(username: string, password: string) {
 
     const rawFormData = {
-        username: 'admin',
-        password: 'password'
+        username: username,
+        password: password
     }
 
     let url = new URL('api/auth/login', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL)
