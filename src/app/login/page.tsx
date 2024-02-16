@@ -1,27 +1,11 @@
 import Link from "next/link";
-import { loginUser } from "@/app/lib/actions";
+import LoginForm from "@/app/login/components/login-form";
 
 export default function Login() {
     return (
         <div>
             <h1>Страница входа</h1>
-
-            <form action={loginUser}>
-                <div>
-                    <input placeholder='Имя пользователя'
-                           type='text'
-                           name='username' />
-                </div>
-                <div>
-                    <input placeholder='Пароль'
-                           type='text'
-                           name='password' />
-                </div>
-                <div>
-                    <button type='submit'>Войти</button>
-                </div>
-            </form>
-
+            <LoginForm />
             <Link href="/">На главную</Link>
         </div>
     );
