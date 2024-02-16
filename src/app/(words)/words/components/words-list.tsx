@@ -13,7 +13,7 @@ export default function WordsList({ languageId, query }: { languageId: number, q
     const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        let url = new URL('api/words/search', process.env.NEXT_PUBLIC_GATEWAY_API_URL);
+        let url = new URL('api/words/search', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL);
         url.searchParams.set('languageId', languageId.toString());
         url.searchParams.set('query', query);
 
