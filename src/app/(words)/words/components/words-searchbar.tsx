@@ -13,7 +13,7 @@ export default function WordsSearchbar() {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const pathname = usePathname();
-    const { replace } = useRouter();
+    const router = useRouter();
 
     useEffect(() => {
         if (inputRef.current) {
@@ -34,7 +34,7 @@ export default function WordsSearchbar() {
             params.delete('q');
         }
 
-        replace(`${pathname}?${params.toString()}`);
+        router.replace(`${pathname}?${params.toString()}`);
     }, 150);
 
     function handleSearchbarKeyDown(event: KeyboardEvent<HTMLInputElement>) {
@@ -43,8 +43,8 @@ export default function WordsSearchbar() {
             setEnteredText('')
         }
 
-        if (event.code == 'Enter') {
-            console.log('Create word: "' + enteredText + '"')
+        if (event.code == 'Enter' && enteredText) {
+            router.push(`/words/create?${searchParams.toString()}`);
         }
     }
 
