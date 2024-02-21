@@ -7,7 +7,8 @@ import { KeyboardEvent, useEffect, useRef, useState } from "react";
 
 export default function WordsSearchbar() {
     const searchParams = useSearchParams();
-    const [enteredText, setEnteredText] = useState(searchParams.get('q')?.toString() || '');
+    let query: string = searchParams.get('q') || '';
+    const [enteredText, setEnteredText] = useState(query);
 
     const inputRef = useRef<HTMLInputElement>(null);
 
