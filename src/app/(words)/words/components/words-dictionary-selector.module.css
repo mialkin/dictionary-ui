@@ -1,0 +1,10 @@
+.container {
+    margin-bottom: 20px;
+}
+
+.container select {
+    padding: 7px;
+    border-width: 1px;
+    border-radius: 5px;
+    width: 200px;
+}
