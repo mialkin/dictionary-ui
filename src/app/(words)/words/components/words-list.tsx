@@ -18,7 +18,7 @@ export default function WordsList({ languageId, query }: { languageId: number, q
         url.searchParams.set('query', query);
 
         fetch(url.toString())
-            .then((res) => res.json())
+            .then((result) => result.json())
             .then((data) => {
                 setData(data)
                 setLoading(false)
