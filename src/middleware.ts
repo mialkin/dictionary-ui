@@ -11,27 +11,23 @@ export function middleware(request: NextRequest) {
         return response;
     }
 
-    let user = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value
+    let userSession = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value
 
-    if (user && pageForGuests(request.nextUrl.pathname)) {
+    if (userSession && unauthorizedPage(request.nextUrl.pathname)) {
         return NextResponse.redirect(new URL('/words', request.url))
     }
 
-    if (!user && pageForUsers(request.nextUrl.pathname)) {
+    if (!userSession && authorizedPage(request.nextUrl.pathname)) {
         return NextResponse.redirect(new URL('/login', request.url))
     }
 }
 
-function pageForGuests(pathname: string) {
-    let guestPaths: string[] = ['/', '/login']
-
-    return guestPaths.indexOf(pathname) > -1
+function unauthorizedPage(pathname: string) {
+    return ['/', '/login'].indexOf(pathname) > -1
 }
 
-function pageForUsers(pathname: string) {
-    let userPaths: string[] = ['/words', '/settings']
-
-    return userPaths.some(x => pathname.startsWith(x))
+function authorizedPage(pathname: string) {
+    return ['/words', '/settings'].some(x => pathname.startsWith(x))
 }
 
 export const config = {
