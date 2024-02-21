@@ -1,12 +1,18 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { redirect, usePathname, useRouter, useSearchParams } from "next/navigation";
 import styles from './words-dictionary-selector.module.css'
 
 export default function WordsDictionarySelector() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
+
+    if (!searchParams.has('language')) {
+        const params = new URLSearchParams(searchParams);
+        params.set('language', '1');
+        redirect(`${pathname}?${params.toString()}`);
+    }
 
     function handleLanguageChange(language: string) {
         const params = new URLSearchParams(searchParams);
@@ -22,7 +28,6 @@ export default function WordsDictionarySelector() {
             }}
             defaultValue={searchParams.get('language')?.toString()}
         >
-            <option value="0">Выбрать словарь</option>
             <option value="1">Английский</option>
             <option value="2">Французский</option>
             <option value="3">Немецкий</option>
