@@ -4,14 +4,16 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import { useEffect, useState } from 'react';
 import { Envelope, Word } from '@/app/library/definitions';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function EditWord({ params }: { params: { id: string } }) {
     const id = params.id;
+    const searchParams = useSearchParams();
     const router = useRouter();
 
-    const [data, setData] = useState<Word>();
+    const [word, setWord] = useState<Word>();
     const [isLoading, setLoading] = useState(true);
+    const [languageId, setLanguage] = useState(searchParams.get('language')?.toString());
 
     useEffect(() => {
         let url = new URL('api/words/get', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL);
@@ -20,30 +22,51 @@ export default function EditWord({ params }: { params: { id: string } }) {
         fetch(url.toString())
             .then((result) => result.json())
             .then((data: Envelope) => {
-                setData(data.result as Word);
+                setWord(data.result as Word);
                 setLoading(false);
             });
-    }, [id]);
+
+        const keyDownHandler = (event: any) => {
+            if (event.code == 'Escape') {
+                router.push('/words');
+            }
+        };
+
+        document.addEventListener('keydown', keyDownHandler);
+
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        };
+    }, []);
 
     // TODO Show spinner? 
     if (isLoading) return <p>Загрузка...</p>;
 
     // TODO Do I need this?
-    if (!data) return <p>Нет данных</p>;
+    if (!word) return <p>Нет данных</p>;
 
     return (
         <div>
             <div className={styles.breadcrumbs}>
-                <Link href="/words">Слова</Link> / Редактировать
+                <Link href='/words'>Слова</Link> / Редактировать
             </div>
             <div>
                 <div>
                     <label>Слово:</label>
                     <input
-                        name="name"
-                        type="text"
+                        name='name'
+                        type='text'
                         size={50}
-                        value={data.name}
+                        value={word.name}
+                        onChange={
+                            event => {
+                                let target = event.target as HTMLInputElement;
+                                setWord({
+                                    ...word,
+                                    name: target.value
+                                });
+                            }
+                        }
                     />
                     <button
                         onClick={async () => {
@@ -57,25 +80,66 @@ export default function EditWord({ params }: { params: { id: string } }) {
                 </div>
                 <div>
                     <label>Транскрипция:</label>
-                    <input name="transcription"
-                           type="text"
-                           value={data.transcription}
+                    <input name='transcription'
+                           type='text'
+                           value={word.transcription}
+                           onChange={
+                               event => {
+                                   let target = event.target as HTMLInputElement;
+                                   setWord({
+                                       ...word,
+                                       transcription: target.value
+                                   });
+                               }
+                           }
                     />
                 </div>
                 <div>
                     <label>Перевод:</label>
-                    <textarea name="translation"
-                              value={data.translation}
+                    <textarea name='translation'
+                              value={word.translation}
                               cols={70}
                               rows={10}
+                              onChange={
+                                  event => {
+                                      let target = event.target as HTMLTextAreaElement;
+                                      setWord({
+                                          ...word,
+                                          translation: target.value
+                                      });
+                                  }
+                              }
                     />
                 </div>
                 <div>
-                    <button>Сохранить</button>
+                    <button
+                        onClick={async () => {
+                            let success = await updateWord(word);
+                            if (success) {
+                                router.push('/words?language=' + languageId);
+                            }
+                        }}>
+                        Сохранить
+                    </button>
                 </div>
             </div>
         </div>
     );
+}
+
+async function updateWord(word: Word | undefined) {
+    let url = new URL('api/words/update', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL);
+
+    const response = await fetch(url.toString(), {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(word)
+    });
+
+    return response.status == 200;
 }
 
 async function deleteWord(id: string) {

@@ -49,7 +49,7 @@ export default function WordsList() {
 
     const list = data.result.map((word: Word) =>
         <div key={word.id} className={styles.word}>
-            <Link href={'/words/' + word.id + '/edit'} className={styles.name}>
+            <Link href={`/words/${word.id}/edit?language=${languageId}`} className={styles.name}>
                 {word.name}
             </Link>
             {word.transcription == null ? ' ' : getTranscription(word)} — {word.translation}
