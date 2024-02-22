@@ -28,10 +28,10 @@ export default function CreateWord() {
     }, []);
 
     return (
-        <main>
+        <div>
             <div>
                 <select
-                    defaultValue={languageId}
+                    value={languageId}
                     onChange={
                         event => {
                             let target = event.target as HTMLSelectElement;
@@ -51,8 +51,8 @@ export default function CreateWord() {
                 <input
                     type='text'
                     name='name'
-                    defaultValue={name}
-                    onInput={event => {
+                    value={name}
+                    onChange={event => {
                         let target = event.target as HTMLInputElement;
                         setName(target.value);
                     }}
@@ -62,7 +62,7 @@ export default function CreateWord() {
                 <label>Транскрипция:</label>
                 <input type='text'
                        name='transcription'
-                       onInput={event => {
+                       onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setTranscription(target.value);
                        }}
@@ -73,8 +73,8 @@ export default function CreateWord() {
                 <textarea name='translation'
                           cols={70}
                           rows={10}
-                          onInput={event => {
-                              let target = event.target as HTMLInputElement;
+                          onChange={event => {
+                              let target = event.target as HTMLTextAreaElement;
                               setTranslation(target.value);
                           }}
                 />
@@ -82,9 +82,9 @@ export default function CreateWord() {
             <div>
                 <button
                     onClick={async () => {
-                        let success = await createWord(languageId!, name!, transcription, translation)
+                        let success = await createWord(languageId!, name!, transcription, translation);
                         if (success) {
-                            router.push('/words')
+                            router.push('/words?language=' + languageId);
                         }
                     }}>
                     Сохранить
@@ -93,7 +93,7 @@ export default function CreateWord() {
             <div>
                 <Link href="/words">К словам</Link>
             </div>
-        </main>
+        </div>
     );
 }
 
@@ -104,7 +104,7 @@ async function createWord(languageId: string, name: string, transcription: strin
         name: name,
         transcription: transcription,
         translation: translation
-    }
+    };
 
     let url = new URL('api/words/create', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL)
 

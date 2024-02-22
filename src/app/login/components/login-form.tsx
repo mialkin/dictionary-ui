@@ -15,7 +15,7 @@ export default function LoginForm() {
                 <input placeholder='Имя пользователя'
                        type='text'
                        name='username'
-                       onInput={event => {
+                       onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setUsername(target.value);
                        }}
@@ -25,7 +25,7 @@ export default function LoginForm() {
                 <input placeholder='Пароль'
                        type='text'
                        name='password'
-                       onInput={event => {
+                       onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setPassword(target.value);
                        }}

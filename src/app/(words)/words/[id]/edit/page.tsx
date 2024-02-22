@@ -4,12 +4,14 @@ import Link from "next/link";
 import styles from './page.module.css'
 import { useEffect, useState } from "react";
 import { Envelope, Word } from "@/app/library/definitions";
+import { useRouter } from "next/navigation";
 
 export default function EditWord({ params }: { params: { id: string } }) {
     const id = params.id;
+    const router = useRouter();
 
-    const [data, setData] = useState<Word | null>(null)
-    const [isLoading, setLoading] = useState(true)
+    const [data, setData] = useState<Word | null>(null);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         let url = new URL('api/words/get', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL);
@@ -20,8 +22,8 @@ export default function EditWord({ params }: { params: { id: string } }) {
             .then((data: Envelope) => {
                 setData(data.result as Word)
                 setLoading(false)
-            })
-    }, [id])
+            });
+    }, [id]);
 
     // TODO Show spinner? 
     if (isLoading) return <p>Загрузка...</p>
@@ -43,6 +45,15 @@ export default function EditWord({ params }: { params: { id: string } }) {
                         size={50}
                         value={data.name}
                     />
+                    <button
+                        onClick={async () => {
+                            let success = await deleteWord(id);
+                            if (success) {
+                                router.push('/words');
+                            }
+                        }}>
+                        Удалить
+                    </button>
                 </div>
                 <div>
                     <label>Транскрипция:</label>
@@ -63,8 +74,25 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     <button>Сохранить</button>
                 </div>
             </div>
-            <div>
-            </div>
         </div>
     );
+}
+
+async function deleteWord(id: string) {
+    let url = new URL('api/words/delete', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL);
+
+    const rawFormData = {
+        Id: id
+    };
+
+    const response = await fetch(url.toString(), {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rawFormData),
+    });
+
+    return response.status == 200;
 }

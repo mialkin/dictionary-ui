@@ -54,11 +54,9 @@ export default function WordsSearchbar() {
                 ref={inputRef}
                 placeholder="Поиск..."
                 value={enteredText}
-                onChange={(event) => {
-                    updateSearchParams(event.target.value);
-                }}
                 onInput={event => {
                     let target = event.target as HTMLInputElement;
+                    updateSearchParams(target.value);
                     setEnteredText(target.value);
                 }}
                 onKeyDown={event => handleSearchbarKeyDown(event)}
