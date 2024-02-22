@@ -52,7 +52,7 @@ export default function WordsSearchbar() {
         <div className={styles.searchbar}>
             <input
                 ref={inputRef}
-                placeholder="Поиск..."
+                placeholder='Поиск...'
                 value={enteredText}
                 onInput={event => {
                     let target = event.target as HTMLInputElement;

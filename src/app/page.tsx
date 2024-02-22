@@ -13,7 +13,7 @@ export default function Home() {
         return <main>
             <div className={styles.main}>Главная страница</div>
             <div>
-                <Link href="/words">Слова</Link>
+                <Link href='/words'>Слова</Link>
             </div>
         </main>;
     }
@@ -21,7 +21,7 @@ export default function Home() {
     return <main>
         <div className={styles.main}>Главная страница</div>
         <div>
-            <Link href="/login">Войти</Link>
+            <Link href='/login'>Войти</Link>
         </div>
     </main>;
 }

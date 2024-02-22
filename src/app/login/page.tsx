@@ -6,7 +6,7 @@ export default function Login() {
         <div>
             <h1>Страница входа</h1>
             <LoginForm />
-            <Link href="/">На главную</Link>
+            <Link href='/'>На главную</Link>
         </div>
     );
 }

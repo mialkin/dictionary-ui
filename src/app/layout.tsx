@@ -14,7 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         // TODO Use lang other than "en"?
         // TODO Why body has to have className?
-        <html lang="en">
+        <html lang='en'>
         <body className={inter.className}>
         {children}
         </body>

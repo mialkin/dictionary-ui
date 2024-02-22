@@ -39,18 +39,18 @@ export default function CreateWord() {
                         }
                     }
                 >
-                    <option value="1">Английский</option>
-                    <option value="2">Французский</option>
-                    <option value="3">Немецкий</option>
-                    <option value="4">Русский</option>
-                    <option value="5">Украинский</option>
+                    <option value='1'>Английский</option>
+                    <option value='2'>Французский</option>
+                    <option value='3'>Немецкий</option>
+                    <option value='4'>Русский</option>
+                    <option value='5'>Украинский</option>
                 </select>
             </div>
             <div>
                 <label>Слово:</label>
                 <input
-                    type="text"
-                    name="name"
+                    type='text'
+                    name='name'
                     value={name}
                     onChange={event => {
                         let target = event.target as HTMLInputElement;
@@ -60,8 +60,8 @@ export default function CreateWord() {
             </div>
             <div>
                 <label>Транскрипция:</label>
-                <input type="text"
-                       name="transcription"
+                <input type='text'
+                       name='transcription'
                        onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setTranscription(target.value);
@@ -70,7 +70,7 @@ export default function CreateWord() {
             </div>
             <div>
                 <label>Перевод:</label>
-                <textarea name="translation"
+                <textarea name='translation'
                           cols={70}
                           rows={10}
                           onChange={event => {
@@ -91,7 +91,7 @@ export default function CreateWord() {
                 </button>
             </div>
             <div>
-                <Link href="/words">К словам</Link>
+                <Link href='/words'>К словам</Link>
             </div>
         </div>
     );

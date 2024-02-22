@@ -7,10 +7,10 @@ export default function WordsLayout({ children }: { children: React.ReactNode })
         <div>
             <div className={styles.header}>
                 <div>
-                    <Link href="/">Логотип</Link>
+                    <Link href='/'>Логотип</Link>
                 </div>
                 <div>
-                    <Link href="/logout">Выйти</Link>
+                    <Link href='/logout'>Выйти</Link>
                 </div>
             </div>
             <div className={styles.main}>

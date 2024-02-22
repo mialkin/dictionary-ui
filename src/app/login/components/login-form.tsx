@@ -12,9 +12,9 @@ export default function LoginForm() {
     return (
         <div>
             <div>
-                <input placeholder="Имя пользователя"
-                       type="text"
-                       name="username"
+                <input placeholder='Имя пользователя'
+                       type='text'
+                       name='username'
                        onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setUsername(target.value);
@@ -22,9 +22,9 @@ export default function LoginForm() {
                 />
             </div>
             <div>
-                <input placeholder="Пароль"
-                       type="text"
-                       name="password"
+                <input placeholder='Пароль'
+                       type='text'
+                       name='password'
                        onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setPassword(target.value);
