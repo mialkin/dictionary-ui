@@ -10,7 +10,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
     const id = params.id;
     const router = useRouter();
 
-    const [data, setData] = useState<Word | null>(null);
+    const [data, setData] = useState<Word>();
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
