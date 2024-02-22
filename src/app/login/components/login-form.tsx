@@ -32,13 +32,13 @@ export default function LoginForm() {
                 />
             </div>
             <div>
-                <button type='button'
-                        onClick={async () => {
-                            let success = await loginUser(username, password)
-                            if (success) {
-                                router.push('/words')
-                            }
-                        }}>
+                <button
+                    onClick={async () => {
+                        let success = await loginUser(username, password)
+                        if (success) {
+                            router.push('/words')
+                        }
+                    }}>
                     Войти
                 </button>
             </div>

@@ -36,29 +36,28 @@ export default function EditWord({ params }: { params: { id: string } }) {
             </div>
             <div>
                 <div>
-                    <label>
-                        Слово: <input
+                    <label>Слово:</label>
+                    <input
                         name='name'
+                        type='text'
                         size={50}
                         value={data.name}
                     />
-                    </label>
                 </div>
                 <div>
-                    <label>
-                        Транскрипция: <input name='transcription'
-                                             value={data.transcription}
+                    <label>Транскрипция:</label>
+                    <input name='transcription'
+                           type='text'
+                           value={data.transcription}
                     />
-                    </label>
                 </div>
                 <div>
-                    <label>
-                        Перевод: <textarea name='translation'
-                                           value={data.translation}
-                                           cols={70}
-                                           rows={10}
+                    <label>Перевод:</label>
+                    <textarea name='translation'
+                              value={data.translation}
+                              cols={70}
+                              rows={10}
                     />
-                    </label>
                 </div>
                 <div>
                     <button>Сохранить</button>
