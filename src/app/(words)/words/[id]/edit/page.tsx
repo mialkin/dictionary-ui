@@ -72,7 +72,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                         onClick={async () => {
                             let success = await deleteWord(id);
                             if (success) {
-                                router.push('/words');
+                                router.push(`/words?language=${languageId}`);
                             }
                         }}>
                         Удалить
@@ -116,7 +116,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                         onClick={async () => {
                             let success = await updateWord(word);
                             if (success) {
-                                router.push('/words?language=' + languageId);
+                                router.push(`/words?language=${languageId}`);
                             }
                         }}>
                         Сохранить
