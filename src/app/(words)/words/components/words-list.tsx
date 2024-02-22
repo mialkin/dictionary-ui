@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from "react";
-import { Word } from "@/app/(words)/words/types/types";
-import styles from './words-list.module.css'
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from 'react';
+import { Word } from '@/app/(words)/words/types/types';
+import styles from './words-list.module.css';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 export default function WordsList() {
     // TODO responses from server can come at different sequence if user types quickly. Preserve sequence
@@ -13,8 +13,8 @@ export default function WordsList() {
     let languageId: number = Number(searchParams.get('language'));
     let query: string = searchParams.get('q') || '';
 
-    const [data, setData] = useState<any>(null)
-    const [isLoading, setLoading] = useState(true)
+    const [data, setData] = useState<any>(null);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         if (languageId > 0) {
@@ -28,19 +28,19 @@ export default function WordsList() {
             fetch(url.toString())
                 .then((result) => result.json())
                 .then((data) => {
-                    setData(data)
-                    setLoading(false)
-                })
+                    setData(data);
+                    setLoading(false);
+                });
         } else {
-            setLoading(false)
+            setLoading(false);
         }
-    }, [languageId, query])
+    }, [languageId, query]);
 
     // TODO Show spinner? 
-    if (isLoading) return <p>Загрузка...</p>
+    if (isLoading) return <p>Загрузка...</p>;
 
     // TODO Do I need this?
-    if (!data) return <p>Нет данных</p>
+    if (!data) return <p>Нет данных</p>;
 
     // TODO Create site map and forbid search engines crawl user's dictionaries
     function getTranscription(word: Word) {

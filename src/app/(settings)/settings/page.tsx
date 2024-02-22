@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React, { useEffect } from "react";
+import React from 'react';
 
 export default function Settings() {
     return (

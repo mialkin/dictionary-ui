@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import Link from "next/link";
-import styles from './page.module.css'
-import { useEffect, useState } from "react";
-import { Envelope, Word } from "@/app/library/definitions";
-import { useRouter } from "next/navigation";
+import Link from 'next/link';
+import styles from './page.module.css';
+import { useEffect, useState } from 'react';
+import { Envelope, Word } from '@/app/library/definitions';
+import { useRouter } from 'next/navigation';
 
 export default function EditWord({ params }: { params: { id: string } }) {
     const id = params.id;
@@ -20,28 +20,28 @@ export default function EditWord({ params }: { params: { id: string } }) {
         fetch(url.toString())
             .then((result) => result.json())
             .then((data: Envelope) => {
-                setData(data.result as Word)
-                setLoading(false)
+                setData(data.result as Word);
+                setLoading(false);
             });
     }, [id]);
 
     // TODO Show spinner? 
-    if (isLoading) return <p>Загрузка...</p>
+    if (isLoading) return <p>Загрузка...</p>;
 
     // TODO Do I need this?
-    if (!data) return <p>Нет данных</p>
+    if (!data) return <p>Нет данных</p>;
 
     return (
         <div>
             <div className={styles.breadcrumbs}>
-                <Link href='/words'>Слова</Link> / Редактировать
+                <Link href="/words">Слова</Link> / Редактировать
             </div>
             <div>
                 <div>
                     <label>Слово:</label>
                     <input
-                        name='name'
-                        type='text'
+                        name="name"
+                        type="text"
                         size={50}
                         value={data.name}
                     />
@@ -57,14 +57,14 @@ export default function EditWord({ params }: { params: { id: string } }) {
                 </div>
                 <div>
                     <label>Транскрипция:</label>
-                    <input name='transcription'
-                           type='text'
+                    <input name="transcription"
+                           type="text"
                            value={data.transcription}
                     />
                 </div>
                 <div>
                     <label>Перевод:</label>
-                    <textarea name='translation'
+                    <textarea name="translation"
                               value={data.translation}
                               cols={70}
                               rows={10}
@@ -89,9 +89,9 @@ async function deleteWord(id: string) {
         method: 'DELETE',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(rawFormData),
+        body: JSON.stringify(rawFormData)
     });
 
     return response.status == 200;

@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function LoginForm() {
-    const router = useRouter()
+    const router = useRouter();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,9 +12,9 @@ export default function LoginForm() {
     return (
         <div>
             <div>
-                <input placeholder='Имя пользователя'
-                       type='text'
-                       name='username'
+                <input placeholder="Имя пользователя"
+                       type="text"
+                       name="username"
                        onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setUsername(target.value);
@@ -22,9 +22,9 @@ export default function LoginForm() {
                 />
             </div>
             <div>
-                <input placeholder='Пароль'
-                       type='text'
-                       name='password'
+                <input placeholder="Пароль"
+                       type="text"
+                       name="password"
                        onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setPassword(target.value);
@@ -34,9 +34,9 @@ export default function LoginForm() {
             <div>
                 <button
                     onClick={async () => {
-                        let success = await loginUser(username, password)
+                        let success = await loginUser(username, password);
                         if (success) {
-                            router.push('/words')
+                            router.push('/words');
                         }
                     }}>
                     Войти
@@ -51,17 +51,17 @@ async function loginUser(username: string, password: string) {
     const rawFormData = {
         username: username,
         password: password
-    }
+    };
 
-    let url = new URL('api/auth/login', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL)
+    let url = new URL('api/auth/login', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL);
 
     const response = await fetch(url.toString(), {
         method: 'POST',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(rawFormData),
+        body: JSON.stringify(rawFormData)
     });
 
     return response.status == 200;

@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import styles from "./words-searchbar.module.css"
-import { useDebouncedCallback } from "use-debounce";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { KeyboardEvent, useEffect, useRef, useState } from "react";
+import styles from './words-searchbar.module.css';
+import { useDebouncedCallback } from 'use-debounce';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 
 export default function WordsSearchbar() {
     const searchParams = useSearchParams();
@@ -20,7 +20,7 @@ export default function WordsSearchbar() {
             inputRef.current.focus();
 
             if (enteredText.length > 0) {
-                inputRef.current.setSelectionRange(enteredText.length, enteredText.length)
+                inputRef.current.setSelectionRange(enteredText.length, enteredText.length);
             }
         }
     }, []);
@@ -39,8 +39,8 @@ export default function WordsSearchbar() {
 
     function handleSearchbarKeyDown(event: KeyboardEvent<HTMLInputElement>) {
         if (event.code == 'Escape') {
-            updateSearchParams('')
-            setEnteredText('')
+            updateSearchParams('');
+            setEnteredText('');
         }
 
         if (event.code == 'Enter' && enteredText) {
@@ -63,5 +63,5 @@ export default function WordsSearchbar() {
             />
             {/* TODO   Change color of autofocused input with styles*/}
         </div>
-    </>
+    </>;
 }

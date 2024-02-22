@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function CreateWord() {
     const searchParams = useSearchParams();
@@ -16,14 +16,14 @@ export default function CreateWord() {
     useEffect(() => {
         const keyDownHandler = (event: any) => {
             if (event.code == 'Escape') {
-                router.push('/words')
+                router.push('/words');
             }
         };
 
-        document.addEventListener("keydown", keyDownHandler);
+        document.addEventListener('keydown', keyDownHandler);
 
         return () => {
-            document.removeEventListener("keydown", keyDownHandler);
+            document.removeEventListener('keydown', keyDownHandler);
         };
     }, []);
 
@@ -39,18 +39,18 @@ export default function CreateWord() {
                         }
                     }
                 >
-                    <option value='1'>Английский</option>
-                    <option value='2'>Французский</option>
-                    <option value='3'>Немецкий</option>
-                    <option value='4'>Русский</option>
-                    <option value='5'>Украинский</option>
+                    <option value="1">Английский</option>
+                    <option value="2">Французский</option>
+                    <option value="3">Немецкий</option>
+                    <option value="4">Русский</option>
+                    <option value="5">Украинский</option>
                 </select>
             </div>
             <div>
                 <label>Слово:</label>
                 <input
-                    type='text'
-                    name='name'
+                    type="text"
+                    name="name"
                     value={name}
                     onChange={event => {
                         let target = event.target as HTMLInputElement;
@@ -60,8 +60,8 @@ export default function CreateWord() {
             </div>
             <div>
                 <label>Транскрипция:</label>
-                <input type='text'
-                       name='transcription'
+                <input type="text"
+                       name="transcription"
                        onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setTranscription(target.value);
@@ -70,7 +70,7 @@ export default function CreateWord() {
             </div>
             <div>
                 <label>Перевод:</label>
-                <textarea name='translation'
+                <textarea name="translation"
                           cols={70}
                           rows={10}
                           onChange={event => {
@@ -106,15 +106,15 @@ async function createWord(languageId: string, name: string, transcription: strin
         translation: translation
     };
 
-    let url = new URL('api/words/create', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL)
+    let url = new URL('api/words/create', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL);
 
     const response = await fetch(url.toString(), {
         method: 'POST',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(rawFormData),
+        body: JSON.stringify(rawFormData)
     });
 
     return response.status == 200;

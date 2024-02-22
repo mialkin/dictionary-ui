@@ -1,8 +1,8 @@
-import React from "react";
-import Link from "next/link";
-import styles from './layout.module.css'
+import React from 'react';
+import Link from 'next/link';
+import styles from './layout.module.css';
 
-export default function WordsLayout({ children, }: { children: React.ReactNode }) {
+export default function WordsLayout({ children }: { children: React.ReactNode }) {
     return <>
         <div>
             <div className={styles.header}>
@@ -17,5 +17,5 @@ export default function WordsLayout({ children, }: { children: React.ReactNode }
                 {children}
             </div>
         </div>
-    </>
+    </>;
 }

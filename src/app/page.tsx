@@ -1,13 +1,13 @@
-import styles from "./page.module.css";
-import React from "react";
-import Link from "next/link";
-import { cookies } from "next/headers";
+import styles from './page.module.css';
+import React from 'react';
+import Link from 'next/link';
+import { cookies } from 'next/headers';
 
 // TODO: Create new app with npx create-next-app@latest and examine its default again
 export default function Home() {
 
-    const cookieStore = cookies()
-    const userIsAuthenticated = cookieStore.get(process.env.SESSION_COOKIE_NAME!)?.value
+    const cookieStore = cookies();
+    const userIsAuthenticated = cookieStore.get(process.env.SESSION_COOKIE_NAME!)?.value;
 
     if (userIsAuthenticated) {
         return <main>
@@ -15,7 +15,7 @@ export default function Home() {
             <div>
                 <Link href="/words">Слова</Link>
             </div>
-        </main>
+        </main>;
     }
 
     return <main>
@@ -23,7 +23,7 @@ export default function Home() {
         <div>
             <Link href="/login">Войти</Link>
         </div>
-    </main>
+    </main>;
 }
 
 // TODO: Consider using /public folder in the root of the project
