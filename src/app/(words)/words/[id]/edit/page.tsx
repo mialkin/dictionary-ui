@@ -19,7 +19,10 @@ export default function EditWord({ params }: { params: { id: string } }) {
         let url = new URL('api/words/get', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL);
         url.searchParams.set('id', id);
 
-        fetch(url.toString())
+        fetch(url.toString(), {
+            method: 'GET',
+            credentials: 'include'
+        })
             .then((result) => result.json())
             .then((data: Envelope) => {
                 setWord(data.result as Word);

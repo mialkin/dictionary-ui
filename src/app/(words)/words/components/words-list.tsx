@@ -25,7 +25,10 @@ export default function WordsList() {
                 url.searchParams.set('query', query);
             }
 
-            fetch(url.toString())
+            fetch(url.toString(), {
+                method: 'GET',
+                credentials: 'include'
+            })
                 .then((result) => result.json())
                 .then((data) => {
                     setData(data);
