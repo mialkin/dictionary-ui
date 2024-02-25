@@ -85,7 +85,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     <label>Транскрипция:</label>
                     <input name='transcription'
                            type='text'
-                           value={word.transcription}
+                           value={word.transcription ?? ''}
                            onChange={
                                event => {
                                    let target = event.target as HTMLInputElement;
