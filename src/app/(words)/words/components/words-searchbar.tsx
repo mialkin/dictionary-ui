@@ -23,7 +23,7 @@ export default function WordsSearchbar() {
                 inputRef.current.setSelectionRange(enteredText.length, enteredText.length);
             }
         }
-    }, []);
+    });
 
     const updateSearchParams = useDebouncedCallback((query: string) => {
         const params = new URLSearchParams(searchParams);

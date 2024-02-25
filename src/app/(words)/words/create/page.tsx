@@ -25,7 +25,7 @@ export default function CreateWord() {
         return () => {
             document.removeEventListener('keydown', keyDownHandler);
         };
-    }, []);
+    }, [router]);
 
     return (
         <div>

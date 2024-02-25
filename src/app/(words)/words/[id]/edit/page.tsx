@@ -40,7 +40,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
         return () => {
             document.removeEventListener('keydown', keyDownHandler);
         };
-    }, []);
+    }, [id, router]);
 
     // TODO Show spinner? 
     if (isLoading) return <p>Загрузка...</p>;
