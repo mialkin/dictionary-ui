@@ -1,4 +1,7 @@
 .git
 .idea
-node_modules
 .next
+.dockerignore
+node_modules
+Dockerfile
+readme.md
