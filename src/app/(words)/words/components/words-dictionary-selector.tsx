@@ -20,20 +20,21 @@ export default function WordsDictionarySelector() {
         replace(`${pathname}?${params.toString()}`);
     }
 
-    return <div className={styles.container}>
-        <select
-            className='words-search-form__language_selector'
-            onChange={(event) => {
-                handleLanguageChange(event.target.value);
-            }}
-            defaultValue={searchParams.get('language')?.toString()}
-        >
-            <option value='1'>Английский</option>
-            <option value='2'>Французский</option>
-            <option value='3'>Немецкий</option>
-            <option value='4'>Русский</option>
-            <option value='5'>Украинский</option>
-        </select>
-    </div>;
-
+    return (
+        <div className={styles.container}>
+            <select
+                className='words-search-form__language_selector'
+                onChange={(event) => {
+                    handleLanguageChange(event.target.value);
+                }}
+                defaultValue={searchParams.get('language')?.toString()}
+            >
+                <option value='1'>Английский</option>
+                <option value='2'>Французский</option>
+                <option value='3'>Немецкий</option>
+                <option value='4'>Русский</option>
+                <option value='5'>Украинский</option>
+            </select>
+        </div>
+    );
 }

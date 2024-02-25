@@ -10,20 +10,24 @@ export default function Home() {
     const userIsAuthenticated = cookieStore.get(process.env.SESSION_COOKIE_NAME!)?.value;
 
     if (userIsAuthenticated) {
-        return <main>
-            <div className={styles.main}>Главная страница</div>
-            <div>
-                <Link href='/words'>Слова</Link>
-            </div>
-        </main>;
+        return (
+            <main>
+                <div className={styles.main}>Главная страница</div>
+                <div>
+                    <Link href='/words'>Слова</Link>
+                </div>
+            </main>
+        );
     }
 
-    return <main>
-        <div className={styles.main}>Главная страница</div>
-        <div>
-            <Link href='/login'>Войти</Link>
-        </div>
-    </main>;
+    return (
+        <main>
+            <div className={styles.main}>Главная страница</div>
+            <div>
+                <Link href='/login'>Войти</Link>
+            </div>
+        </main>
+    );
 }
 
 // TODO: Consider using /public folder in the root of the project

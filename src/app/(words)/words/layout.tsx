@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from './layout.module.css';
 
 export default function WordsLayout({ children }: { children: React.ReactNode }) {
-    return <>
+    return (
         <div>
             <div className={styles.header}>
                 <div>
@@ -17,5 +17,5 @@ export default function WordsLayout({ children }: { children: React.ReactNode })
                 {children}
             </div>
         </div>
-    </>;
+    );
 }
