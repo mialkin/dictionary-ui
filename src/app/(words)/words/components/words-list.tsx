@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { Word } from '@/app/(words)/words/types/types';
 import styles from './words-list.module.css';
 import Link from 'next/link';
@@ -59,5 +59,9 @@ export default function WordsList() {
         </div>
     );
 
-    return <div>{list}</div>;
+    return (
+        <Suspense>
+            <div>{list}</div>
+        </Suspense>
+    );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './layout.module.css';
+import { Suspense } from 'react';
 
 export default function WordsLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -14,7 +15,9 @@ export default function WordsLayout({ children }: { children: React.ReactNode })
                 </div>
             </div>
             <div className={styles.main}>
-                {children}
+                <Suspense>
+                    {children}
+                </Suspense>
             </div>
         </div>
     );
