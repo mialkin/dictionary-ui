@@ -4,22 +4,22 @@ import { NextResponse } from 'next/server';
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
 
-    if (request.nextUrl.pathname == '/logout') {
-        let response = NextResponse.redirect(new URL('/', request.url));
-        response.cookies.delete(process.env.SESSION_COOKIE_NAME!);
-
-        return response;
-    }
-
-    let userSession = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value;
-
-    if (userSession && unauthorizedPage(request.nextUrl.pathname)) {
-        return NextResponse.redirect(new URL('/words', request.url));
-    }
-
-    if (!userSession && authorizedPage(request.nextUrl.pathname)) {
-        return NextResponse.redirect(new URL('/login', request.url));
-    }
+    // if (request.nextUrl.pathname == '/logout') {
+    //     let response = NextResponse.redirect(new URL('/', request.url));
+    //     response.cookies.delete(process.env.SESSION_COOKIE_NAME!);
+    //
+    //     return response;
+    // }
+    //
+    // let userSession = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value;
+    //
+    // if (userSession && unauthorizedPage(request.nextUrl.pathname)) {
+    //     return NextResponse.redirect(new URL('/words', request.url));
+    // }
+    //
+    // if (!userSession && authorizedPage(request.nextUrl.pathname)) {
+    //     return NextResponse.redirect(new URL('/login', request.url));
+    // }
 }
 
 function unauthorizedPage(pathname: string) {
