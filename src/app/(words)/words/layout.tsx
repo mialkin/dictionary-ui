@@ -10,10 +10,12 @@ export default function WordsLayout({ children }: { children: React.ReactNode })
                     <Link href='/'>Логотип</Link>
                 </div>
                 <div>
-                    <a
-                        href={new URL('api/auth/logout', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL).toString()}>
-                        Выйти
-                    </a>
+                    <form
+                        action={new URL('api/auth/logout', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL).toString()}
+                        method='POST'
+                    >
+                        <button type='submit'>Выйти</button>
+                    </form>
                 </div>
             </div>
             <div className={styles.main}>
