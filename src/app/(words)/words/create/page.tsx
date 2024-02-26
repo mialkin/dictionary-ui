@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function CreateWord() {
     const searchParams = useSearchParams();
@@ -28,74 +28,72 @@ export default function CreateWord() {
     }, [router]);
 
     return (
-        <Suspense>
+        <div>
             <div>
-                <div>
-                    <select
-                        value={languageId}
-                        onChange={
-                            event => {
-                                let target = event.target as HTMLSelectElement;
-                                setLanguage(target.value);
-                            }
+                <select
+                    value={languageId}
+                    onChange={
+                        event => {
+                            let target = event.target as HTMLSelectElement;
+                            setLanguage(target.value);
                         }
-                    >
-                        <option value='1'>Английский</option>
-                        <option value='2'>Французский</option>
-                        <option value='3'>Немецкий</option>
-                        <option value='4'>Русский</option>
-                        <option value='5'>Украинский</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Слово:</label>
-                    <input
-                        type='text'
-                        name='name'
-                        value={name}
-                        onChange={event => {
-                            let target = event.target as HTMLInputElement;
-                            setName(target.value);
-                        }}
-                    />
-                </div>
-                <div>
-                    <label>Транскрипция:</label>
-                    <input type='text'
-                           name='transcription'
-                           onChange={event => {
-                               let target = event.target as HTMLInputElement;
-                               setTranscription(target.value);
-                           }}
-                    />
-                </div>
-                <div>
-                    <label>Перевод:</label>
-                    <textarea name='translation'
-                              cols={70}
-                              rows={10}
-                              onChange={event => {
-                                  let target = event.target as HTMLTextAreaElement;
-                                  setTranslation(target.value);
-                              }}
-                    />
-                </div>
-                <div>
-                    <button
-                        onClick={async () => {
-                            let success = await createWord(languageId!, name!, transcription, translation);
-                            if (success) {
-                                router.push('/words?language=' + languageId);
-                            }
-                        }}>
-                        Сохранить
-                    </button>
-                </div>
-                <div>
-                    <Link href='/words'>К словам</Link>
-                </div>
+                    }
+                >
+                    <option value='1'>Английский</option>
+                    <option value='2'>Французский</option>
+                    <option value='3'>Немецкий</option>
+                    <option value='4'>Русский</option>
+                    <option value='5'>Украинский</option>
+                </select>
             </div>
-        </Suspense>
+            <div>
+                <label>Слово:</label>
+                <input
+                    type='text'
+                    name='name'
+                    value={name}
+                    onChange={event => {
+                        let target = event.target as HTMLInputElement;
+                        setName(target.value);
+                    }}
+                />
+            </div>
+            <div>
+                <label>Транскрипция:</label>
+                <input type='text'
+                       name='transcription'
+                       onChange={event => {
+                           let target = event.target as HTMLInputElement;
+                           setTranscription(target.value);
+                       }}
+                />
+            </div>
+            <div>
+                <label>Перевод:</label>
+                <textarea name='translation'
+                          cols={70}
+                          rows={10}
+                          onChange={event => {
+                              let target = event.target as HTMLTextAreaElement;
+                              setTranslation(target.value);
+                          }}
+                />
+            </div>
+            <div>
+                <button
+                    onClick={async () => {
+                        let success = await createWord(languageId!, name!, transcription, translation);
+                        if (success) {
+                            router.push('/words?language=' + languageId);
+                        }
+                    }}>
+                    Сохранить
+                </button>
+            </div>
+            <div>
+                <Link href='/words'>К словам</Link>
+            </div>
+        </div>
     );
 }
 
