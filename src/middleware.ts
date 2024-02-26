@@ -3,30 +3,22 @@ import { NextResponse } from 'next/server';
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
+    let authCookie = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value;
 
-    // if (request.nextUrl.pathname == '/logout') {
-    //     let response = NextResponse.redirect(new URL('/', request.url));
-    //     response.cookies.delete(process.env.SESSION_COOKIE_NAME!);
-    //
-    //     return response;
-    // }
-    //
-    // let userSession = request.cookies.get(process.env.SESSION_COOKIE_NAME!)?.value;
-    //
-    // if (userSession && unauthorizedPage(request.nextUrl.pathname)) {
-    //     return NextResponse.redirect(new URL('/words', request.url));
-    // }
-    //
-    // if (!userSession && authorizedPage(request.nextUrl.pathname)) {
-    //     return NextResponse.redirect(new URL('/login', request.url));
-    // }
+    if (authCookie && guestPage(request.nextUrl.pathname)) {
+        return NextResponse.redirect(new URL('/words', request.url));
+    }
+
+    if (!authCookie && userPage(request.nextUrl.pathname)) {
+        return NextResponse.redirect(new URL('/login', request.url));
+    }
 }
 
-function unauthorizedPage(pathname: string) {
+function guestPage(pathname: string) {
     return ['/', '/login'].indexOf(pathname) > -1;
 }
 
-function authorizedPage(pathname: string) {
+function userPage(pathname: string) {
     return ['/words', '/settings'].some(x => pathname.startsWith(x));
 }
 
