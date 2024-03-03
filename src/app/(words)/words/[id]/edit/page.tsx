@@ -51,7 +51,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
     return (
         <div>
             <div className={styles.breadcrumbs}>
-                <Link href='/words'>Слова</Link> / Редактировать
+                <Link href='/words'>Назад</Link>
             </div>
             <div>
                 <div>
@@ -59,7 +59,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     <input
                         name='name'
                         type='text'
-                        size={50}
+                        size={30}
                         value={word.name}
                         onChange={
                             event => {
@@ -71,15 +71,6 @@ export default function EditWord({ params }: { params: { id: string } }) {
                             }
                         }
                     />
-                    <button
-                        onClick={async () => {
-                            let success = await deleteWord(id);
-                            if (success) {
-                                router.push(`/words?language=${languageId}`);
-                            }
-                        }}>
-                        Удалить
-                    </button>
                 </div>
                 <div>
                     <label>Транскрипция:</label>
@@ -115,6 +106,15 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     />
                 </div>
                 <div>
+                    <button
+                        onClick={async () => {
+                            let success = await deleteWord(id);
+                            if (success) {
+                                router.push(`/words?language=${languageId}`);
+                            }
+                        }}>
+                        Удалить
+                    </button>
                     <button
                         onClick={async () => {
                             let success = await updateWord(word);
