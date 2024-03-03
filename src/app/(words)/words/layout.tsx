@@ -11,7 +11,7 @@ export default function WordsLayout({ children }: { children: React.ReactNode })
                 </div>
                 <div>
                     <form
-                        action={new URL('auth/logout', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL).toString()}
+                        action={new URL('/logout', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL).toString()}
                         method='POST'
                     >
                         <button type='submit'>Выйти</button>

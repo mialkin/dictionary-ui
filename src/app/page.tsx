@@ -24,7 +24,7 @@ export default function Home() {
         <main>
             <div className={styles.main}>Главная страница</div>
             <div>
-                <Link href={new URL('auth/login', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL)}>Войти</Link>
+                <Link href={new URL('/login', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL)}>Войти</Link>
             </div>
         </main>
     );
