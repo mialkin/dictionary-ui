@@ -35,7 +35,7 @@ export default function WordsSearchbar() {
         }
 
         router.replace(`${pathname}?${params.toString()}`);
-    }, 150);
+    }, 50);
 
     function handleSearchbarKeyDown(event: KeyboardEvent<HTMLInputElement>) {
         if (event.code == 'Escape') {
@@ -61,7 +61,6 @@ export default function WordsSearchbar() {
                 }}
                 onKeyDown={event => handleSearchbarKeyDown(event)}
             />
-            {/* TODO   Change color of autofocused input with styles*/}
         </div>
     );
 }
