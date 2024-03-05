@@ -30,6 +30,9 @@ export default function CreateWord() {
     return (
         <div>
             <div>
+                <Link href='/words'>Назад</Link>
+            </div>
+            <div>
                 <select
                     value={languageId}
                     onChange={
@@ -89,9 +92,6 @@ export default function CreateWord() {
                     }}>
                     Сохранить
                 </button>
-            </div>
-            <div>
-                <Link href='/words'>К словам</Link>
             </div>
         </div>
     );

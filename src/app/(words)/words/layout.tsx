@@ -6,17 +6,10 @@ export default function WordsLayout({ children }: { children: React.ReactNode })
     return (
         <div>
             <div className={styles.header}>
-                <div>
-                    <Link href='/'>Логотип</Link>
-                </div>
-                <div>
-                    <form
-                        action={new URL('/logout', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL).toString()}
-                        method='POST'
-                    >
-                        <button type='submit'>Выйти</button>
-                    </form>
-                </div>
+                <form action={new URL('/logout', process.env.NEXT_PUBLIC_CLIENT_GATEWAY_API_URL).toString()}
+                      method='POST'>
+                    <input type='submit' value='Выйти' />
+                </form>
             </div>
             <div className={styles.main}>
                 {children}

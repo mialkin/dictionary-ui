@@ -7,14 +7,13 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'Словарь',
-    description: 'Словарь для хранения слов'
+    description: 'Персональный словарь для хранения слов'
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
     return (
-        // TODO Use lang other than "en"?
         // TODO Why body has to have className?
-        <html lang='en'>
+        <html lang='ru'>
         <body className={inter.className}>
         {children}
         </body>
