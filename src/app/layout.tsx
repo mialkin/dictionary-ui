@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import 'modern-normalize/modern-normalize.css';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
