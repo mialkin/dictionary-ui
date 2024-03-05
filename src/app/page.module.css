@@ -1,18 +1,6 @@
 .container {
-    display: grid;
-    grid-template-rows: 40px auto;
-}
-
-.container header {
-    padding-right: 10px;
     display: flex;
-    justify-content: flex-end;
-}
-
-.login {
-    display: flex;
-}
-
-.login a {
-    align-self: center;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
