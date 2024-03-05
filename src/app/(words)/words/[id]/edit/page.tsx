@@ -50,31 +50,29 @@ export default function EditWord({ params }: { params: { id: string } }) {
 
     return (
         <div>
-            <div className={styles.breadcrumbs}>
-                <Link href='/words'>Назад</Link>
-            </div>
-            <div>
-                <div>
+            <form>
+                <div className={`${styles.item} ${styles.name}`}>
                     <label>Слово:</label>
-                    <input
-                        name='name'
-                        type='text'
-                        size={30}
-                        value={word.name}
-                        onChange={
-                            event => {
-                                let target = event.target as HTMLInputElement;
-                                setWord({
-                                    ...word,
-                                    name: target.value
-                                });
-                            }
-                        }
+                    <input name='name'
+                           autoCapitalize='off'
+                           type='text'
+                           size={30}
+                           value={word.name}
+                           onChange={
+                               event => {
+                                   let target = event.target as HTMLInputElement;
+                                   setWord({
+                                       ...word,
+                                       name: target.value
+                                   });
+                               }
+                           }
                     />
                 </div>
-                <div>
+                <div className={`${styles.item} ${styles.transcription}`}>
                     <label>Транскрипция:</label>
                     <input name='transcription'
+                           autoCapitalize='off'
                            type='text'
                            value={word.transcription ?? ''}
                            onChange={
@@ -88,11 +86,11 @@ export default function EditWord({ params }: { params: { id: string } }) {
                            }
                     />
                 </div>
-                <div>
+                <div className={`${styles.item} ${styles.translation}`}>
                     <label>Перевод:</label>
                     <textarea name='translation'
+                              autoCapitalize='off'
                               value={word.translation}
-                              cols={70}
                               rows={10}
                               onChange={
                                   event => {
@@ -105,7 +103,8 @@ export default function EditWord({ params }: { params: { id: string } }) {
                               }
                     />
                 </div>
-                <div>
+                <div className={`${styles.item} ${styles.buttons}`}>
+                    <Link href='/words'>Назад</Link>
                     <button
                         onClick={async () => {
                             let success = await deleteWord(id);
@@ -125,7 +124,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                         Сохранить
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }
