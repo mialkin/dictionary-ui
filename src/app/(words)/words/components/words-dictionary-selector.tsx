@@ -23,7 +23,6 @@ export default function WordsDictionarySelector() {
     return (
         <div className={styles.container}>
             <select
-                className='words-search-form__language_selector'
                 onChange={(event) => {
                     handleLanguageChange(event.target.value);
                 }}
