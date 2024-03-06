@@ -51,7 +51,7 @@ export default function WordsSearchbar() {
     return (
         <div className={styles.searchbar}>
             <input
-                type='search'
+                type='text'
                 autoCapitalize='off'
                 ref={inputRef}
                 placeholder='Поиск...'

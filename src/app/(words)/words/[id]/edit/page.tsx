@@ -107,24 +107,26 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     <div>
                         <Link href='/words'>Назад</Link>
                     </div>
-                    <button
-                        onClick={async () => {
-                            let success = await deleteWord(id);
-                            if (success) {
-                                router.push(`/words?language=${languageId}`);
-                            }
-                        }}>
-                        Удалить
-                    </button>
-                    <button
-                        onClick={async () => {
-                            let success = await updateWord(word);
-                            if (success) {
-                                router.push(`/words?language=${languageId}`);
-                            }
-                        }}>
-                        Сохранить
-                    </button>
+                    <div className={styles.right}>
+                        <button
+                            onClick={async () => {
+                                let success = await deleteWord(id);
+                                if (success) {
+                                    router.push(`/words?language=${languageId}`);
+                                }
+                            }}>
+                            Удалить
+                        </button>
+                        <button
+                            onClick={async () => {
+                                let success = await updateWord(word);
+                                if (success) {
+                                    router.push(`/words?language=${languageId}`);
+                                }
+                            }}>
+                            Сохранить
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,7 @@
-.form .item {
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .form .item label {
@@ -7,16 +10,16 @@
     color: gray;
 }
 
-.name, .transcription {
-    height: 58px;
-}
-
 .translation textarea {
     width: 100%;
 }
 
 .buttons {
-    display: grid;
-    grid-auto-flow: column;
-    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons .right {
+    display: flex;
+    gap: 10px;
 }
