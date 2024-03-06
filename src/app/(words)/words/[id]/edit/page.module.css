@@ -1,7 +1,7 @@
-form .item {
+.form .item {
 }
 
-form .item label {
+.form .item label {
     display: block;
     padding-bottom: 3px;
     color: gray;

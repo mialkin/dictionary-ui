@@ -9,5 +9,5 @@
 }
 
 .searchbar input:focus {
-    outline: none !important;
+    /*outline: none !important;*/
 }

@@ -50,7 +50,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
 
     return (
         <div>
-            <form>
+            <div className={styles.form}>
                 <div className={`${styles.item} ${styles.name}`}>
                     <label>Слово:</label>
                     <input name='name'
@@ -104,7 +104,9 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     />
                 </div>
                 <div className={`${styles.item} ${styles.buttons}`}>
-                    <Link href='/words'>Назад</Link>
+                    <div>
+                        <Link href='/words'>Назад</Link>
+                    </div>
                     <button
                         onClick={async () => {
                             let success = await deleteWord(id);
@@ -124,7 +126,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                         Сохранить
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
     );
 }
