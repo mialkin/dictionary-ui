@@ -5,6 +5,8 @@ import styles from './page.module.css';
 import { useEffect, useState } from 'react';
 import { Envelope, Word } from '@/app/library/definitions';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 export default function EditWord({ params }: { params: { id: string } }) {
     const id = params.id;
@@ -115,7 +117,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                                     router.push(`/words?language=${languageId}`);
                                 }
                             }}>
-                            Удалить
+                            <FontAwesomeIcon icon={faTrashCan} /> Удалить
                         </button>
                         <button
                             onClick={async () => {

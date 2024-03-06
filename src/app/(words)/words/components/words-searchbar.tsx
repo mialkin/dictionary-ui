@@ -5,6 +5,9 @@ import { useDebouncedCallback } from 'use-debounce';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
 export default function WordsSearchbar() {
     const searchParams = useSearchParams();
     let query: string = searchParams.get('q') || '';
@@ -49,20 +52,41 @@ export default function WordsSearchbar() {
     }
 
     return (
-        <div className={styles.searchbar}>
-            <input
-                type='text'
-                autoCapitalize='off'
-                ref={inputRef}
-                placeholder='Поиск...'
-                value={enteredText}
-                onInput={event => {
-                    let target = event.target as HTMLInputElement;
-                    updateSearchParams(target.value);
-                    setEnteredText(target.value);
-                }}
-                onKeyDown={event => handleSearchbarKeyDown(event)}
-            />
+        <div>
+            <div className={styles.container}>
+                <div className={styles.search}>
+                    <input
+                        type='text'
+                        autoCapitalize='off'
+                        ref={inputRef}
+                        placeholder='Поиск...'
+                        value={enteredText}
+                        onInput={event => {
+                            let target = event.target as HTMLInputElement;
+                            updateSearchParams(target.value);
+                            setEnteredText(target.value);
+                        }}
+                        onKeyDown={event => handleSearchbarKeyDown(event)}
+                    />
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className={styles.reset}
+                        onClick={() => {
+                            updateSearchParams('');
+                            setEnteredText('');
+                        }}
+                    />
+                </div>
+                <button disabled={enteredText == ''}
+                        onClick={(event) => {
+                            if (enteredText) {
+                                router.push(`/words/create?${searchParams.toString()}`);
+                            }
+                        }}>
+                    Создать
+                </button>
+            </div>
+            <div className={styles.spacer}></div>
         </div>
     );
 }
