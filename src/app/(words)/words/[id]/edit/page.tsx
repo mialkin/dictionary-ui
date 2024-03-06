@@ -51,7 +51,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
     return (
         <div>
             <div className={styles.form}>
-                <div className={`${styles.item} ${styles.name}`}>
+                <div>
                     <label>Слово:</label>
                     <input name='name'
                            autoCapitalize='off'
@@ -69,7 +69,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                            }
                     />
                 </div>
-                <div className={`${styles.item} ${styles.transcription}`}>
+                <div className={styles.transcription}>
                     <label>Транскрипция:</label>
                     <input name='transcription'
                            autoCapitalize='off'
@@ -86,7 +86,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                            }
                     />
                 </div>
-                <div className={`${styles.item} ${styles.translation}`}>
+                <div className={styles.translation}>
                     <label>Перевод:</label>
                     <textarea name='translation'
                               autoCapitalize='off'
@@ -103,7 +103,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                               }
                     />
                 </div>
-                <div className={`${styles.item} ${styles.buttons}`}>
+                <div className={styles.buttons}>
                     <div>
                         <Link href='/words'>Назад</Link>
                     </div>

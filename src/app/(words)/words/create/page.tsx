@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import styles from './page.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -28,10 +29,7 @@ export default function CreateWord() {
     }, [router]);
 
     return (
-        <div>
-            <div>
-                <Link href='/words'>Назад</Link>
-            </div>
+        <div className={styles.form}>
             <div>
                 <select
                     value={languageId}
@@ -53,6 +51,7 @@ export default function CreateWord() {
                 <label>Слово:</label>
                 <input
                     type='text'
+                    size={30}
                     autoCapitalize='off'
                     name='name'
                     value={name}
@@ -62,7 +61,7 @@ export default function CreateWord() {
                     }}
                 />
             </div>
-            <div>
+            <div className={styles.transcription}>
                 <label>Транскрипция:</label>
                 <input type='text'
                        name='transcription'
@@ -73,7 +72,7 @@ export default function CreateWord() {
                        }}
                 />
             </div>
-            <div>
+            <div className={styles.translation}>
                 <label>Перевод:</label>
                 <textarea name='translation'
                           autoCapitalize='off'
@@ -85,7 +84,8 @@ export default function CreateWord() {
                           }}
                 />
             </div>
-            <div>
+            <div className={styles.buttons}>
+                <Link href='/words'>Назад</Link>
                 <button
                     onClick={async () => {
                         let success = await createWord(languageId!, name!, transcription, translation);
