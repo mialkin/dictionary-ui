@@ -50,7 +50,7 @@ export default function WordsList() {
         return <>&nbsp;<span className={styles.transcription}>/{word.transcription}/</span>&nbsp;</>;
     }
 
-    const list = data.result.map((word: Word) =>
+    const list = data.map((word: Word) =>
         <div key={word.id} className={styles.word}>
             <Link href={`/words/${word.id}/edit?language=${languageId}`} className={styles.name}>
                 {word.name}

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import styles from './page.module.css';
 import { useEffect, useState } from 'react';
-import { Envelope, Word } from '@/app/library/definitions';
+import { Word } from '@/app/library/definitions';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
@@ -26,8 +26,8 @@ export default function EditWord({ params }: { params: { id: string } }) {
             credentials: 'include'
         })
             .then((result) => result.json())
-            .then((data: Envelope) => {
-                setWord(data.result as Word);
+            .then((data: Word) => {
+                setWord(data);
                 setLoading(false);
             });
 
