@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import styles from './page.module.css';
-import { useEffect, useState } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 import { Word } from '@/app/library/definitions';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -50,6 +50,19 @@ export default function EditWord({ params }: { params: { id: string } }) {
     // TODO Do I need this?
     if (!word) return <p>Нет данных</p>;
 
+    async function handleKeyDown(event: KeyboardEvent<any>) {
+        if (event.code == 'Enter' && (event.metaKey || event.ctrlKey)) {
+            await updateWordLocal();
+        }
+    }
+
+    async function updateWordLocal() {
+        let success = await updateWord(word);
+        if (success) {
+            router.push(`/words?language=${languageId}`);
+        }
+    }
+
     return (
         <div>
             <div className={styles.form}>
@@ -69,6 +82,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                                    });
                                }
                            }
+                           onKeyDown={handleKeyDown}
                     />
                 </div>
                 <div className={styles.transcription}>
@@ -86,6 +100,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                                    });
                                }
                            }
+                           onKeyDown={handleKeyDown}
                     />
                 </div>
                 <div className={styles.translation}>
@@ -94,6 +109,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                               autoCapitalize='off'
                               value={word.translation}
                               rows={10}
+                              autoFocus={true}
                               onChange={
                                   event => {
                                       let target = event.target as HTMLTextAreaElement;
@@ -103,6 +119,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                                       });
                                   }
                               }
+                              onKeyDown={handleKeyDown}
                     />
                 </div>
                 <div className={styles.buttons}>
@@ -120,12 +137,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                             <FontAwesomeIcon icon={faTrashCan} /> Удалить
                         </button>
                         <button
-                            onClick={async () => {
-                                let success = await updateWord(word);
-                                if (success) {
-                                    router.push(`/words?language=${languageId}`);
-                                }
-                            }}>
+                            onClick={updateWordLocal}>
                             Сохранить
                         </button>
                     </div>
