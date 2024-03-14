@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import styles from './page.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 
 export default function CreateWord() {
     const searchParams = useSearchParams();
@@ -28,6 +28,19 @@ export default function CreateWord() {
         };
     }, [router]);
 
+    async function handleKeyDown(event: KeyboardEvent<any>) {
+        if (event.code == 'Enter' && (event.metaKey || event.ctrlKey)) {
+            await createWordInternal();
+        }
+    }
+
+    async function createWordInternal() {
+        let success = await createWord(languageId!, name!, transcription, translation);
+        if (success) {
+            router.push('/words?language=' + languageId);
+        }
+    }
+
     return (
         <div className={styles.form}>
             <div>
@@ -39,6 +52,7 @@ export default function CreateWord() {
                             setLanguage(target.value);
                         }
                     }
+                    onKeyDown={event => handleKeyDown(event)}
                 >
                     <option value='1'>Английский</option>
                     <option value='2'>Французский</option>
@@ -70,6 +84,7 @@ export default function CreateWord() {
                            let target = event.target as HTMLInputElement;
                            setTranscription(target.value);
                        }}
+                       onKeyDown={event => handleKeyDown(event)}
                 />
             </div>
             <div className={styles.translation}>
@@ -78,21 +93,18 @@ export default function CreateWord() {
                           autoCapitalize='off'
                           cols={70}
                           rows={10}
+                          autoFocus={true}
                           onChange={event => {
                               let target = event.target as HTMLTextAreaElement;
                               setTranslation(target.value);
                           }}
+                          onKeyDown={event => handleKeyDown(event)}
                 />
             </div>
             <div className={styles.buttons}>
                 <Link href='/words'>Назад</Link>
                 <button
-                    onClick={async () => {
-                        let success = await createWord(languageId!, name!, transcription, translation);
-                        if (success) {
-                            router.push('/words?language=' + languageId);
-                        }
-                    }}>
+                    onClick={createWordInternal}>
                     Сохранить
                 </button>
             </div>
