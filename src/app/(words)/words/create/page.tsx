@@ -67,6 +67,7 @@ export default function CreateWord() {
                     type='text'
                     size={30}
                     autoCapitalize='off'
+                    autoCorrect='off'
                     name='name'
                     value={name}
                     onChange={event => {
@@ -80,6 +81,7 @@ export default function CreateWord() {
                 <input type='text'
                        name='transcription'
                        autoCapitalize='off'
+                       autoCorrect='off'
                        onChange={event => {
                            let target = event.target as HTMLInputElement;
                            setTranscription(target.value);
@@ -91,6 +93,7 @@ export default function CreateWord() {
                 <label>Перевод:</label>
                 <textarea name='translation'
                           autoCapitalize='off'
+                          autoCorrect='off'
                           cols={70}
                           rows={10}
                           autoFocus={true}

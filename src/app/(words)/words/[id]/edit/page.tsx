@@ -70,6 +70,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     <label>Слово:</label>
                     <input name='name'
                            autoCapitalize='off'
+                           autoCorrect='off'
                            type='text'
                            size={30}
                            value={word.name}
@@ -89,6 +90,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     <label>Транскрипция:</label>
                     <input name='transcription'
                            autoCapitalize='off'
+                           autoCorrect='off'
                            type='text'
                            value={word.transcription ?? ''}
                            onChange={
@@ -107,6 +109,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                     <label>Перевод:</label>
                     <textarea name='translation'
                               autoCapitalize='off'
+                              autoCorrect='off'
                               value={word.translation}
                               rows={10}
                               autoFocus={true}
