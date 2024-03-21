@@ -58,6 +58,7 @@ export default function WordsSearchbar() {
                     <input
                         type='text'
                         autoCapitalize='off'
+                        autoCorrect='off'
                         ref={inputRef}
                         placeholder='Поиск...'
                         value={enteredText}
