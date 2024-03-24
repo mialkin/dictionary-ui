@@ -10,6 +10,12 @@
     color: gray;
 }
 
+.genders {
+    display: flex;
+    width: 120px;
+    justify-content: space-between;
+}
+
 .translation textarea {
     width: 100%;
 }

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { KeyboardEvent, useEffect, useState } from 'react';
+import { WordGender } from '@/app/(words)/words/types/types';
 
 export default function CreateWord() {
     const searchParams = useSearchParams();
@@ -12,6 +13,11 @@ export default function CreateWord() {
     const [languageId, setLanguage] = useState(searchParams.get('language')?.toString());
     const [name, setName] = useState(searchParams.get('q')?.toString());
     const [transcription, setTranscription] = useState('');
+    const [gender, setGender] = useState<WordGender>({
+        masculine: false,
+        feminine: false,
+        neuter: false
+    });
     const [translation, setTranslation] = useState('');
 
     useEffect(() => {
@@ -35,7 +41,7 @@ export default function CreateWord() {
     }
 
     async function createWordInternal() {
-        let success = await createWord(languageId!, name!, transcription, translation);
+        let success = await createWord(languageId!, name!, transcription, gender, translation);
         if (success) {
             router.push('/words?language=' + languageId);
         }
@@ -89,6 +95,47 @@ export default function CreateWord() {
                        onKeyDown={event => handleKeyDown(event)}
                 />
             </div>
+            <div>
+                <label>Род:</label>
+                <div className={styles.genders}>
+                    <div>
+                        <input
+                            type='checkbox'
+                            onChange={event => {
+                                let target = event.target as HTMLInputElement;
+                                setGender({
+                                    ...gender,
+                                    masculine: target.checked
+                                });
+                            }}
+                        /> м
+                    </div>
+                    <div>
+                        <input
+                            type='checkbox'
+                            onChange={event => {
+                                let target = event.target as HTMLInputElement;
+                                setGender({
+                                    ...gender,
+                                    feminine: target.checked
+                                });
+                            }}
+                        /> ж
+                    </div>
+                    <div>
+                        <input
+                            type='checkbox'
+                            onChange={event => {
+                                let target = event.target as HTMLInputElement;
+                                setGender({
+                                    ...gender,
+                                    neuter: target.checked
+                                });
+                            }}
+                        /> с
+                    </div>
+                </div>
+            </div>
             <div className={styles.translation}>
                 <label>Перевод:</label>
                 <textarea name='translation'
@@ -115,12 +162,13 @@ export default function CreateWord() {
     );
 }
 
-async function createWord(languageId: string, name: string, transcription: string, translation: string) {
+async function createWord(languageId: string, name: string, transcription: string, gender: WordGender, translation: string) {
 
     const rawFormData = {
         languageId: languageId,
         name: name,
         transcription: transcription,
+        gender: gender.masculine || gender.feminine || gender.neuter ? gender : null,
         translation: translation
     };
 
