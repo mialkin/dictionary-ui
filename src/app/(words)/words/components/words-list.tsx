@@ -50,12 +50,41 @@ export default function WordsList() {
         return <>&nbsp;<span className={styles.transcription}>/{word.transcription}/</span>&nbsp;</>;
     }
 
+    function getGender(word: Word) {
+        let gender = word.gender;
+
+        if (gender == null) {
+            return <>&nbsp;</>;
+        }
+
+        let genders: Array<string> = [];
+
+        // TODO Add tooltip on hover
+        
+        if (gender.masculine) {
+            genders.push('м');
+        }
+
+        if (gender.feminine) {
+            genders.push('ж');
+        }
+
+        if (gender.neuter) {
+            genders.push('с');
+        }
+
+        return <>&nbsp;<span className={styles.gender}>{genders.join(', ')}</span>&nbsp;</>;
+    }
+
     const list = data.map((word: Word) =>
         <div key={word.id} className={styles.word}>
             <Link href={`/words/${word.id}/edit?language=${languageId}`} className={styles.name}>
                 {word.name}
             </Link>
-            {word.transcription == null ? ' ' : getTranscription(word)} — {word.translation}
+            {word.transcription == null ? ' ' : getTranscription(word)}
+            —
+            {getGender(word)}
+            {word.translation}
         </div>
     );
 
