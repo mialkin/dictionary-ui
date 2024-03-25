@@ -51,7 +51,8 @@ export default function EditWord({ params }: { params: { id: string } }) {
     if (!word) return <p>Нет данных</p>;
 
     async function handleKeyDown(event: KeyboardEvent<any>) {
-        if (event.code == 'Enter' && (event.metaKey || event.ctrlKey)) {
+        if (event.code == 'Enter' && !event.shiftKey && !event.metaKey && !event.ctrlKey && !event.altKey) {
+            event.preventDefault();
             await updateWordLocal();
         }
     }

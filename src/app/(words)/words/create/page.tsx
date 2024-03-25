@@ -35,7 +35,8 @@ export default function CreateWord() {
     }, [router]);
 
     async function handleKeyDown(event: KeyboardEvent<any>) {
-        if (event.code == 'Enter' && (event.metaKey || event.ctrlKey)) {
+        if (event.code == 'Enter' && !event.shiftKey && !event.metaKey && !event.ctrlKey && !event.altKey) {
+            event.preventDefault();
             await createWordInternal();
         }
     }
@@ -80,6 +81,7 @@ export default function CreateWord() {
                         let target = event.target as HTMLInputElement;
                         setName(target.value);
                     }}
+                    onKeyDown={event => handleKeyDown(event)}
                 />
             </div>
             <div className={styles.transcription}>
@@ -108,6 +110,7 @@ export default function CreateWord() {
                                     masculine: target.checked
                                 });
                             }}
+                            onKeyDown={event => handleKeyDown(event)}
                         /> м
                     </div>
                     <div>
@@ -120,6 +123,7 @@ export default function CreateWord() {
                                     feminine: target.checked
                                 });
                             }}
+                            onKeyDown={event => handleKeyDown(event)}
                         /> ж
                     </div>
                     <div>
@@ -132,6 +136,7 @@ export default function CreateWord() {
                                     neuter: target.checked
                                 });
                             }}
+                            onKeyDown={event => handleKeyDown(event)}
                         /> с
                     </div>
                 </div>
