@@ -23,7 +23,7 @@ export default function CreateWord() {
     useEffect(() => {
         const keyDownHandler = (event: any) => {
             if (event.code == 'Escape') {
-                router.push('/words');
+                router.push(`/words?language=${languageId}`);
             }
         };
 
@@ -43,7 +43,7 @@ export default function CreateWord() {
     async function createWordInternal() {
         let success = await createWord(languageId!, name!, transcription, gender, translation);
         if (success) {
-            router.push('/words?language=' + languageId);
+            router.push(`/words?language=${languageId}`);
         }
     }
 

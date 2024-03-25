@@ -41,6 +41,9 @@ export default function WordsSearchbar() {
     }, 50);
 
     function handleSearchbarKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+        
+        //  TODO Consider global event handler
+        
         if (event.code == 'Escape') {
             updateSearchParams('');
             setEnteredText('');

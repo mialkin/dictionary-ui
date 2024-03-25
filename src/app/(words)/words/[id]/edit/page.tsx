@@ -33,7 +33,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
 
         const keyDownHandler = (event: any) => {
             if (event.code == 'Escape') {
-                router.push('/words');
+                router.push(`/words?language=${languageId}`);
             }
         };
 
