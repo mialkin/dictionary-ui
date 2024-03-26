@@ -106,6 +106,65 @@ export default function EditWord({ params }: { params: { id: string } }) {
                            onKeyDown={handleKeyDown}
                     />
                 </div>
+                <div>
+                    <label>Род:</label>
+                    <div className={styles.genders}>
+                        <div>
+                            <input
+                                type='checkbox'
+                                checked={word.gender.masculine}
+                                onChange={event => {
+                                    let target = event.target as HTMLInputElement;
+
+                                    let gender = word.gender;
+                                    gender['masculine'] = target.checked;
+
+                                    setWord({
+                                        ...word,
+                                        gender
+                                    });
+                                }}
+                                onKeyDown={event => handleKeyDown(event)}
+                            /> м
+                        </div>
+                        <div>
+                            <input
+                                type='checkbox'
+                                checked={word.gender.feminine}
+                                onChange={event => {
+                                    let target = event.target as HTMLInputElement;
+
+                                    let gender = word.gender;
+                                    gender['feminine'] = target.checked;
+
+                                    setWord({
+                                        ...word,
+                                        gender
+                                    });
+                                }}
+                                onKeyDown={event => handleKeyDown(event)}
+                            /> ж
+                        </div>
+                        <div>
+                            <input
+                                type='checkbox'
+                                checked={word.gender.neuter}
+                                onChange={event => {
+                                    let target = event.target as HTMLInputElement;
+
+                                    let gender = word.gender;
+                                    gender['neuter'] = target.checked;
+
+                                    setWord({
+                                        ...word,
+                                        gender
+                                    });
+                                }}
+                                onKeyDown={event => handleKeyDown(event)}
+                            /> с
+                        </div>
+                    </div>
+                </div>
                 <div className={styles.translation}>
                     <label>Перевод:</label>
                     <textarea name='translation'

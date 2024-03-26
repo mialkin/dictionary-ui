@@ -2,7 +2,7 @@ export interface Word {
     id: string;
     name: string;
     transcription?: string;
-    gender?: WordGender;
+    gender: WordGender;
     translation: string;
 }
 

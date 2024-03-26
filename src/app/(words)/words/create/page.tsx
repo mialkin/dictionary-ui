@@ -173,7 +173,7 @@ async function createWord(languageId: string, name: string, transcription: strin
         languageId: languageId,
         name: name,
         transcription: transcription,
-        gender: gender.masculine || gender.feminine || gender.neuter ? gender : null,
+        gender: gender,
         translation: translation
     };
 
