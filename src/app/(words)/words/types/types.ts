@@ -4,6 +4,7 @@ export type Word = {
     transcription?: string;
     gender: WordGender;
     translation: string;
+    createdAt: string;
 }
 
 export type WordGender = {

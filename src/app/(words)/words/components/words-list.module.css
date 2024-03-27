@@ -18,3 +18,8 @@
     font-style: italic;
     color: green;
 }
+
+.created {
+    color: gray;
+    font-size: 10px;
+}

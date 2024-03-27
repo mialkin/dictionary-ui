@@ -60,7 +60,7 @@ export default function WordsList() {
         let genders: Array<string> = [];
 
         // TODO Add tooltip on hover
-        
+
         if (gender.masculine) {
             genders.push('м');
         }
@@ -85,6 +85,15 @@ export default function WordsList() {
             —
             {getGender(word)}
             {word.translation}
+            &nbsp;
+            <sub>
+            <span
+                className={styles.created}
+                title={'Год добавления слова в словарь — ' + new Date(word.createdAt).getFullYear()}
+            >
+                {new Date(word.createdAt).getFullYear() % 100}
+            </span>
+            </sub>
         </div>
     );
 
