@@ -111,7 +111,7 @@ export default function CreateWord() {
                                 });
                             }}
                             onKeyDown={event => handleKeyDown(event)}
-                        /> м
+                        /> m
                     </div>
                     <div>
                         <input
@@ -124,7 +124,7 @@ export default function CreateWord() {
                                 });
                             }}
                             onKeyDown={event => handleKeyDown(event)}
-                        /> ж
+                        /> f
                     </div>
                     <div>
                         <input
@@ -137,7 +137,7 @@ export default function CreateWord() {
                                 });
                             }}
                             onKeyDown={event => handleKeyDown(event)}
-                        /> с
+                        /> n
                     </div>
                 </div>
             </div>

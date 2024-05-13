@@ -62,15 +62,15 @@ export default function WordsList() {
         // TODO Add tooltip on hover
 
         if (gender.masculine) {
-            genders.push('м');
+            genders.push('m');
         }
 
         if (gender.feminine) {
-            genders.push('ж');
+            genders.push('f');
         }
 
         if (gender.neuter) {
-            genders.push('с');
+            genders.push('n');
         }
 
         return <>&nbsp;<span className={styles.gender}>{genders.join(', ')}</span>&nbsp;</>;

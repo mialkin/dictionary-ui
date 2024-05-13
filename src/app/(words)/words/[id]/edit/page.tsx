@@ -125,7 +125,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                                     });
                                 }}
                                 onKeyDown={event => handleKeyDown(event)}
-                            /> м
+                            /> m
                         </div>
                         <div>
                             <input
@@ -143,7 +143,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                                     });
                                 }}
                                 onKeyDown={event => handleKeyDown(event)}
-                            /> ж
+                            /> f
                         </div>
                         <div>
                             <input
@@ -161,7 +161,7 @@ export default function EditWord({ params }: { params: { id: string } }) {
                                     });
                                 }}
                                 onKeyDown={event => handleKeyDown(event)}
-                            /> с
+                            /> n
                         </div>
                     </div>
                 </div>
